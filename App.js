@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, View} from 'react-native';
@@ -20,23 +21,23 @@ const App = () => {
 
   return (
     // <Inbox/>
-    <Index />
+    // <Index />
     // <Explore/>
     // <Home />
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //     initialRouteName="Login"
-    //     screenOptions={{
-    //       headerShown: false,
-    //     }}>
-    //     <Stack.Screen name="Login" component={Login} />
-    //     <Stack.Screen name="Login1" component={Login1} />
-    //     <Stack.Screen name="Tabs" component={Tabs} />
-    //     <Stack.Screen name="SignIn" component={SignIn} />
-    //     <Stack.Screen name="DetailsEx" component={DetailsEx} />
-    //     <Stack.Screen name="Hotel" component={Hotel} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login1" component={Login1} />
+        <Stack.Screen name="Tabs" component={Tabs} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="DetailsEx" component={DetailsEx} />
+        <Stack.Screen name="Hotel" component={Hotel} />
+      </Stack.Navigator>
+    </NavigationContainer>
     // <Saved1 />
     // <Indexx />
     // <DetailsEx />

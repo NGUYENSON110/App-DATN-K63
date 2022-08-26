@@ -26,6 +26,7 @@ import Switch1 from '../ImageLocationScreen/Switch1';
 import Switch2 from '../ImageLocationScreen/Switch2';
 import Switch3 from '../ImageLocationScreen/Switch3';
 
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -95,7 +96,7 @@ const Home = ({navigation}) => {
           {/*  Experience and Image*/}
 
           <View>
-            <View style={style.Experience}>
+            <View style={style.Experience}> 
               <Text style={style.textExperience}> Experience </Text>
             </View>
 
@@ -132,7 +133,7 @@ const Home = ({navigation}) => {
                     source={{
                       uri: 'https://ik.imagekit.io/tvlk/image/imageResource/2022/05/10/1652165154789-a2f1dcf402cfd405cdde3e88c53ced37.png?tr=q-75 ',
                     }}
-                    style={style.ImageVoucher}
+                    style={style.ImageVoucher}  
                   />
                 </View>
 
@@ -413,4 +414,5 @@ const style = StyleSheet.create({
     color: '#E01E1E',
     fontSize: 18,
   },
+  
 });
