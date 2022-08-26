@@ -106,6 +106,10 @@ const Home = ({navigation}) => {
                 {NameLocalType == 'HCM' ? <Switch1 /> : null}
                 {NameLocalType == 'Đà Lạt' ? <Switch2 /> : null}
                 {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null}
+
+                <View>
+                  
+                </View>
                   
             </View>
           </View>
