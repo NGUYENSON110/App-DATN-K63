@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { useState } from 'react';
+import {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {AuthContext} from '../context/conText';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -61,6 +62,15 @@ const CreateLogo = () => {
 
 const LoginInput = () => {
   const [pwHidden, setPWHidden] = useState(true);
+  const [userName, setuserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const {register} = useContext(AuthContext);
+
+  console.log(userName);
+  console.log(password);
+  console.log(email);
+
   return (
     <View style={styles.CreateAccInput}>
       <View style={{width: windowWidth - 60}}>
@@ -68,6 +78,7 @@ const LoginInput = () => {
           placeholder="FullName"
           style={{color: '#475569'}}
           keyboardType="email-address"
+          onChangeText={value => setuserName(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
       </View>
@@ -77,6 +88,7 @@ const LoginInput = () => {
           placeholder="Email address or phone number"
           style={{color: '#475569'}}
           keyboardType="email-address"
+          onChangeText={value => setEmail(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
       </View>
@@ -94,13 +106,13 @@ const LoginInput = () => {
             placeholder="Password"
             style={{color: '#475569'}}
             secureTextEntry={pwHidden ? true : false}
+            onChangeText={value => setPassword(value)}
           />
 
           <TouchableOpacity
-              onPress={()=>{
-                setPWHidden(!pwHidden)
-              }}
-          >
+            onPress={() => {
+              setPWHidden(!pwHidden);
+            }}>
             <Image
               source={require('../../Image/Vector.png')}
               style={{width: 21, height: 15, marginRight: 10}}
@@ -121,6 +133,9 @@ const LoginInput = () => {
               alignItems: 'center',
               justifyContent: 'center',
               padding: 13,
+            }}
+            onPress={() => {
+              register(userName,email,password);
             }}>
             <Text style={{color: 'white'}}>Create Account</Text>
           </TouchableOpacity>
@@ -141,13 +156,15 @@ const SignIn = () => {
             style={{
               color: '#828282',
             }}>
-           Already have an account?
+            Already have an account?
           </Text>
-          <TouchableOpacity style={{}} onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity
+            style={{}}
+            onPress={() => navigation.navigate('Login')}>
             <Text style={{color: '#101010', marginLeft: 10}}>Login</Text>
           </TouchableOpacity>
         </View>
-        </View>
+      </View>
     </View>
   );
 };

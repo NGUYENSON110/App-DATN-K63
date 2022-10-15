@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -6,13 +6,15 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-
 } from 'react-native';
-import { useState } from 'react';
+import {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import { AuthContext } from '../context/conText';
+
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -62,13 +64,19 @@ const LoginLogo = () => {
 
 const LoginInput = () => {
   const navigation = useNavigation();
+  const [userName, setuserName] = useState('');
+  const [password, setPassword] = useState('');
+  
+
   return (
     <View style={styles.LoginInput}>
       <View style={{width: windowWidth - 60}}>
+        
         <TextInput
           placeholder="UserName"
           style={{color: '#475569'}}
           keyboardType="email-address"
+          onChangeText={value => setuserName(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
       </View>
@@ -81,12 +89,12 @@ const LoginInput = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            
           }}>
           <TextInput
             placeholder="Password"
             style={{color: '#475569'}}
             secureTextEntry={true}
+            onChangeText={value => setPassword(value)}
           />
 
           <TouchableOpacity
@@ -105,9 +113,9 @@ const LoginInput = () => {
           colors={['#8AB50C', '#2C816B']}
           style={{borderRadius: 5}}>
           <TouchableOpacity
-          onPress={()=>{
-            navigation.navigate('Tabs')
-          }}
+            onPress={() => {
+              navigation.navigate('Tabs');
+            }}
             style={{
               width: windowWidth - 60,
               alignItems: 'center',
@@ -196,9 +204,11 @@ const SignIn = () => {
             }}>
             Don't have account ?
           </Text>
-          <TouchableOpacity style={{}} onPress={()=>{
-            navigation.navigate('CreateNewAcc')
-          }}>
+          <TouchableOpacity
+            style={{}}
+            onPress={() => {
+              navigation.navigate('CreateNewAcc');
+            }}>
             <Text style={{color: '#101010', marginLeft: 10}}>Create Now</Text>
           </TouchableOpacity>
         </View>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -25,15 +25,63 @@ import Switch from '../ImageLocationScreen/Switch';
 import Switch1 from '../ImageLocationScreen/Switch1';
 import Switch2 from '../ImageLocationScreen/Switch2';
 import Switch3 from '../ImageLocationScreen/Switch3';
-
+import axios from 'axios';
+import catChuoi from '../Catchuoi/catChuoi';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const NameLocals = ['Nha Trang', 'HCM', 'Đà Lạt', 'Đà Nẵng'];
+// const NameLocals = ['Nha trang', 'HCM', 'Đà Lạt', 'Đà Nẵng'];
 
 const Home = ({navigation}) => {
-  const [NameLocalType, setNameLocalType] = useState('Nha Trang');
+  const [NameLocalType, setNameLocalType] = useState('Nha trang');
+  const [dataAddress, setDataAddress] = useState([]);
+  const [dataHotel, setdataHotel] = useState([]);
+  const [dataVoucher, setVoucher] = useState([]);
+
+  // API ADDRESS
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(`http://10.0.2.2:5000/v1/address`);
+      setDataAddress(result.data);
+      console.log('111111111', dataAddress);
+    };
+    fetchData();
+  }, []);
+
+  // API HOTEL
+  useEffect(() => {
+    const fetchDataHotel = async () => {
+      const result = await axios.get(`http://10.0.2.2:5000/v1/hotel`);
+      setdataHotel(result.data);
+      console.log('222222', dataHotel);
+    };
+    fetchDataHotel();
+  }, []);
+
+  // API VOUCHER
+  useEffect(() => {
+    const fetchDataVoucher = async () => {
+      const result = await axios.get(`http://10.0.2.2:5000/v1/voucher`);
+      setVoucher(result.data);
+      console.log('333333', dataVoucher);
+    };
+    fetchDataVoucher();
+  }, []);
+
+  // FUNCTION RESREACH 
+  const searchItem = (value) =>{
+      if(value){
+          const newData = dataHotel.filter((item) =>{
+              const itemData = item.name ? item.name.toUpperCase() : ""
+                return itemData.indexOf();
+          })
+          setdataHotel(newData)
+      }
+      else{
+        setdataHotel(dataHotel)
+      }
+  }
 
   return (
     <SafeAreaView style={style.backGround}>
@@ -66,15 +114,18 @@ const Home = ({navigation}) => {
             <TextInput
               style={style.textInput}
               placeholder="Tìm kiếm khách sạn"
+              onChangeText={(value) => {
+                searchItem(value)
+              }}
             />
           </View>
 
           {/* Story */}
           <View style={style.Story}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {NameLocals.map(NameLocal => (
+              {dataAddress.map((NameLocal, index) => (
                 <TouchableOpacity
-                  key={NameLocal}
+                  key={index.toString()}
                   style={{
                     width: 120,
                     height: 40,
@@ -88,7 +139,7 @@ const Home = ({navigation}) => {
                   onPress={() => {
                     setNameLocalType(NameLocal);
                   }}>
-                  <Text>{NameLocal}</Text>
+                  <Text>{NameLocal.name}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -96,21 +147,15 @@ const Home = ({navigation}) => {
           {/*  Experience and Image*/}
 
           <View>
-            <View style={style.Experience}> 
+            <View style={style.Experience}>
               <Text style={style.textExperience}> Experience </Text>
             </View>
 
             <View>
-             
-                {NameLocalType == 'Nha Trang' ? <Switch /> : null}
-                {NameLocalType == 'HCM' ? <Switch1 /> : null}
-                {NameLocalType == 'Đà Lạt' ? <Switch2 /> : null}
-                {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null}
-
-                <View>
-                  
-                </View>
-                  
+              <Switch />
+              {/* {NameLocalType == 'Hồ Chí Minh' ? <Switch1 /> : null}
+                {NameLocalType == 'Hà Nội' ? <Switch2 /> : null}
+                {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null} */}
             </View>
           </View>
 
@@ -123,149 +168,67 @@ const Home = ({navigation}) => {
 
             <View style={style.Voucher}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <View style={style.VoucherImage1}>
-                  <Image
-                    source={{
-                      uri: 'https://ik.imagekit.io/tvlk/image/imageResource/2022/03/17/1647503029217-1c30a1f33dc20593a6f2b2fd2ea7eb4b.jpeg?tr=q-75 ',
-                    }}
-                    style={style.ImageVoucher}
-                  />
-                </View>
-
-                <View style={style.VoucherImage}>
-                  <Image
-                    source={{
-                      uri: 'https://ik.imagekit.io/tvlk/image/imageResource/2022/05/10/1652165154789-a2f1dcf402cfd405cdde3e88c53ced37.png?tr=q-75 ',
-                    }}
-                    style={style.ImageVoucher}  
-                  />
-                </View>
-
-                <View style={style.VoucherImage}>
-                  <Image
-                    source={{
-                      uri: 'https://ik.imagekit.io/tvlk/image/imageResource/2022/01/07/1641539003712-a5e2ba3c333312b3d28ddd354c980ae1.jpeg?tr=q-75 ',
-                    }}
-                    style={style.ImageVoucher}
-                  />
-                </View>
+                {dataVoucher.map((voucherApi, index) => (
+                 
+                  <View style={style.VoucherImage1} key={index.toString()}>
+                    <Image
+                    
+                      source={{
+                        uri: voucherApi.imageurl,
+                      }}
+                      style={style.ImageVoucher}
+                    />
+                  </View>
+                ))}
               </ScrollView>
             </View>
           </View>
 
           {/* Hotel */}
-          <View
-            style={{
-              height: 450,
-            }}>
+          <View style={{height: 450}}>
             <View style={style.Experience}>
               <Text style={style.textExperience}> Hotel </Text>
             </View>
 
             <View>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <TouchableOpacity
-                  style={style.HotelTouch}
-                  onPress={() => {
-                    navigation.navigate('Hotel');
-                  }}>
-                  <Image
-                    source={{
-                      uri: 'https://cdn1.nhatrangtoday.vn/images/photos/khach-san-melissa-nha-trang-sanh-1.jpg',
-                    }}
-                    style={style.HotelTouchImage}
-                  />
-                  <View style={style.HotelText}>
-                    <Text style={style.HotelName}>
-                      Khách Sạn Melisa Nha Trang
-                    </Text>
-                    <Text style={style.HotelStar}>
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                    </Text>
-                    <Text style={style.HotelPrice}>5.300.300</Text>
-                    <Text style={style.HotelPriceNew}>3.300.300</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.HotelTouch}>
-                  <Image
-                    source={{
-                      uri: 'https://files.giaoducthoidai.vn/Uploaded/haihn/2019-12-24/a0-tr12-CZEB.jpg',
-                    }}
-                    style={style.HotelTouchImage}
-                  />
-                  <View style={style.HotelText}>
-                    <Text style={style.HotelName}>
-                      Mường Thanh Luxury Hotel
-                    </Text>
-                    <Text style={style.HotelStar}>
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                    </Text>
-                    <Text style={style.HotelPrice}>2.300.300</Text>
-                    <Text style={style.HotelPriceNew}>1.750.300</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.HotelTouch}>
-                  <Image
-                    source={{
-                      uri: 'https://khachsandanang.info/wp-content/uploads/2017/02/tong-quan-20.jpg',
-                    }}
-                    style={style.HotelTouchImage}
-                  />
-                  <View style={style.HotelText}>
-                    <Text style={style.HotelName}>
-                      Khách Sạn Đà Nẵng Bay Hotel
-                    </Text>
-                    <Text style={style.HotelStar}>
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                    </Text>
-                    <Text style={style.HotelPrice}>2.300.300</Text>
-                    <Text style={style.HotelPriceNew}>1.000.300</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={style.HotelTouch}>
-                  <Image
-                    source={{
-                      uri: 'https://cdn1.nhatrangtoday.vn/images/photos/khach-san-melissa-nha-trang-sanh-1.jpg',
-                    }}
-                    style={style.HotelTouchImage}
-                  />
-                  <View style={style.HotelText}>
-                    <Text style={style.HotelName}>
-                      Khách Sạn Melisa Nha Trang
-                    </Text>
-                    <Text style={style.HotelStar}>
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                      <AntDesign name="star" size={16} />
-                    </Text>
-                    <Text style={style.HotelPrice}>4.300.300</Text>
-                    <Text style={style.HotelPriceNew}>3.800.000</Text>
-                  </View>
-                </TouchableOpacity>
+                {dataHotel.map((hotelApi, index) => (
+                  <TouchableOpacity
+                    key={index.toString()}
+                    style={style.HotelTouch}
+                    onPress={() => {
+                      navigation.navigate('Hotel');
+                    }}>
+                    <Image
+                      source={{
+                        uri: hotelApi.imageurl,
+                      }}
+                      style={style.HotelTouchImage}
+                    />
+                    <View style={style.HotelText}>
+                      <Text style={style.HotelName}>{hotelApi.name}</Text>
+                      <Text style={style.HotelStar}>
+                        <AntDesign name="star" size={16} />
+                        <AntDesign name="star" size={16} />
+                        <AntDesign name="star" size={16} />
+                        <AntDesign name="star" size={16} />
+                        <AntDesign name="star" size={16} />
+                      </Text>
+                      <Text style={style.HotelPrice}>
+                        {catChuoi(hotelApi.price)}
+                      </Text>
+                      <Text style={style.HotelPriceNew}>
+                        {catChuoi(hotelApi.disscount)}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
               </ScrollView>
             </View>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-    // </ImageBackground>
   );
 };
 export default Home;
@@ -418,5 +381,4 @@ const style = StyleSheet.create({
     color: '#E01E1E',
     fontSize: 18,
   },
-  
 });
