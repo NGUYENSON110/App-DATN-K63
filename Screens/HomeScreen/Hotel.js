@@ -15,6 +15,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Octicons  from "react-native-vector-icons/Octicons"
+import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "./Home";
 
@@ -26,11 +28,11 @@ const Hotel = ({ navigation }) => {
         <View>
           {/* Back */}
 
-          <View style={style.iconBack} 
-         
+          <View style={style.iconBack}
+
           >
             <TouchableOpacity style={style.iconBack}
-              onPress ={() =>{
+              onPress={() => {
                 navigation.navigate('Home')
               }}
             >
@@ -76,111 +78,109 @@ const Hotel = ({ navigation }) => {
           {/* Name HoTel */}
 
           <View style={style.Hotel}>
-                <View style={style.NameHotel}>
-                    <Text style={style.NameHotelText}> Malisa Khánh Hòa Hotel</Text>
-                </View>
+            <View style={style.NameHotel}>
+              <Text style={style.NameHotelText}> Malisa Khánh Hòa Hotel</Text>
+            </View>
 
-                <View style={{
-                    marginLeft: 30,
-                    marginTop: 10,
-                }}>
-                    <Text style={{color:"#FFCE31"}}> 
-                        <AntDesign name="star" size={15}/>
-                        <AntDesign name="star" size={15}/>
-                        <AntDesign name="star" size={15}/>
-                        <AntDesign name="star" size={15} color="#C4C4C4"/>
-                        <AntDesign name="star" size={15} color="#C4C4C4"/>
-                    </Text>
-                </View>
+            <View style={{
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}>
+              <View style={{ flexDirection: "row", marginTop: 10, }}>
+                <AntDesign name="enviroment" size={15} style={{ color: '#5c7dff' }} />
+                <Text style={{ marginLeft: 7, }}>Ádads</Text>
+              </View>
 
-                <View style={{
-                  flexDirection:'row',
-                  marginTop: 10,
-                }}>
-                    <FontAwesome name="map-marker" size={20} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 14}}> Nha Trang, Khánh Hòa</Text>
-                </View>
+              <View>
+                <Text style={{ color: "#FFCE31", marginRight: 20, }}>
+                  <AntDesign name="star" size={15} />
+                  <Text>4.2(84 Reviews)</Text>
+                </Text>
+              </View>
+            </View>
 
-                <View style={{
-                  marginTop: 10,
-                  flexDirection: 'row',
-                  
+            <View style={{ flexDirection: 'row', marginTop: 10, }}>
+              <Text style={{ color: '#5c7dff' }}>$46</Text>
+              <Text style={{ marginLeft: 5, }}>Per Night</Text>
+            </View>
 
-                }}>
-                    <Ionicons name="people" size={19} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 10}}>2 Người Lớn</Text>
-                </View>
+            <View style={{ marginTop: 5, }}>
+              <Text>áddđsđâsdasdasdasdasdasdsad</Text>
+            </View>
 
-                <View 
-                  style={{
-                    marginTop: 10,
-                    flexDirection: 'row',
-      
-                  }}
-                >
-                    <AntDesign name="gift" size={19} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 10}}>Miễn Phí Nhận Phòng Sớm cho 120 phút</Text>
-                </View>
-
-                <View 
-                  style={{
-                    marginTop: 10,
-                    flexDirection: 'row',
-      
-                  }}
-                >
-                    <AntDesign name="gift" size={19} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 10}}>Miễn Phí Nhận Phòng Trễ cho 60 phút</Text>
-                </View>
-
-                <View 
-                  style={{
-                    marginTop: 10,
-                    flexDirection: 'row',
-      
-                  }}
-                >
-                    <AntDesign name="gift" size={19} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 10}}>Miễn Phí Bữa Sáng</Text>
-                </View>
-
-                <View 
-                  style={{
-                    marginTop: 10,
-                    flexDirection: 'row',
-      
-                  }}
-                >
-                    <AntDesign name="gift" size={19} style={{ color:'#8bc8cc'}}/>
-                    <Text style={{ marginLeft: 10}}>Miễn Phí Hủy Đặt Phòng</Text>
-                </View>
           </View>
-              {/* Price */}
+          {/* HOTEL ICON */}
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 20, marginRight: 20, marginTop: 10, }}>
 
-              <View style={style.Price}>
-                  <View>
-                      <Text style={{ fontSize: 20, textDecorationLine:'line-through', color: '#C4C4C4'}}>2.700.000</Text>
-                  </View>
+            <View style={{ alignItems: 'center' }}>
+              <FontAwesome name="feed" size={21} style={{ marginRight: 5, color: '#19190b' }} />
+              <Text>Wifi</Text>
+            </View>
 
-                  <View>
-                      <Text style={{ fontSize: 28, color: '#FF9900'}}>1.700.000</Text>
-                  </View>
+            <View style={{ alignItems: 'center' }}>
+              <FontAwesome name="bath" size={21} style={{ marginRight: 5, color: '#19190b' }} />
+              <Text>Shower</Text>
+            </View>
+
+            <View style={{ alignItems: 'center' }}>
+              <MaterialIcons name="free-breakfast" size={21} style={{ marginRight: 5, color: '#19190b' }} />
+              <Text>Breakfast</Text>
+            </View>
+
+            <View style={{ alignItems: 'center' }}>
+              <FontAwesome name="credit-card" size={21} style={{ marginRight: 5, color: '#19190b' }} />
+              <Text>Card</Text>
+            </View>
+
+          </View>
+          {/* Location */}
+
+          <View>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10, }}>
+              <View>
+                <Text style={{ fontSize: 15, fontWeight: '700', }}>Location</Text>
               </View>
-                
-
-              {/* Button */}
-              <View  style={style.Price}>
-                    <View>
-                        <TouchableOpacity style={style.button}>
-                          <Text style={{
-                            fontSize: 24,
-                          }}>
-                            BOOK
-                          </Text>
-                        </TouchableOpacity>
-                    </View>
-
+              <View>
+                <TouchableOpacity>
+                  <Text style={{ fontSize: 15, fontWeight: '700', color: '#66ccf2' }}>View Detail</Text>
+                </TouchableOpacity>
               </View>
+            </View>
+
+            <View>
+              <Image source={require("../../Image/imageAddressGooglemap.jpg")}
+                style={{ width: '95%', height: 150, marginLeft: 10, borderRadius: 20, }}
+              />
+            </View>
+          </View>
+
+
+
+
+          {/* Button */}
+          <View style={style.Btn_comment_book_container}>
+
+
+            <View style={{backgroundColor:'#FFFFFF', width:80, marginLeft: 20, marginTop: 10, borderRadius: 30, alignItems:'center'}}>
+              <TouchableOpacity style={{padding: 10,}}>
+                <Octicons name="comment" size={40} />
+              </TouchableOpacity>
+            </View>
+
+
+            <View>
+              <TouchableOpacity style={style.button_Book}>
+                <Text style={{
+                  fontSize: 24,
+                  color:'#FFFFFF'
+                }}>
+                  BOOK NOW
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
 
 
 
@@ -208,7 +208,7 @@ const style = StyleSheet.create({
     height: 70,
     borderRadius: 15,
     marginLeft: 5,
-   
+
   },
   HotelImg: {
     marginTop: 10,
@@ -218,27 +218,30 @@ const style = StyleSheet.create({
     marginLeft: 15,
     height: 80,
   },
-//   Name Hotel
-Hotel:{
+  //   Name Hotel
+  Hotel: {
     marginLeft: 20,
-},
-NameHotelText:{
+  },
+  NameHotelText: {
     fontSize: 20,
 
-},
-// Price
-Price:{
-  alignItems:'center',
-  justifyContent:'center',
-  marginTop: 15,
-},
-// Button
-button:{
-  width: 350,
-  height: 70,
-  backgroundColor: '#FFBC4F',
-  borderRadius: 15,
-  alignItems:'center',
-  justifyContent:'center'
-}
+  },
+  // Price
+
+
+  // Button
+  button_Book: {
+    width: 250,
+    height: 65,
+    backgroundColor: '#5171e9',
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight:15,
+    marginTop:10,
+  },
+  Btn_comment_book_container:{
+    flexDirection:'row',
+    justifyContent:'space-between'
+  }
 });

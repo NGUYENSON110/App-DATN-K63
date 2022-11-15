@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -33,7 +33,7 @@ const windowHeight = Dimensions.get('window').height;
 
 // const NameLocals = ['Nha trang', 'HCM', 'Đà Lạt', 'Đà Nẵng'];
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [NameLocalType, setNameLocalType] = useState('Nha trang');
   const [dataAddress, setDataAddress] = useState([]);
   const [dataHotel, setdataHotel] = useState([]);
@@ -70,18 +70,18 @@ const Home = ({navigation}) => {
   }, []);
 
   // FUNCTION RESREACH 
-  const searchItem = (value) =>{
-      if(value){
-          const newData = dataHotel.filter((item) =>{
-              const itemData = item.name ? item.name.toUpperCase() : ""
-                return itemData.indexOf();
-          })
-          setdataHotel(newData)
-      }
-      else{
-        setdataHotel(dataHotel)
-      }
-  }
+  // const searchItem = (value) =>{
+  //     if(value){
+  //         const newData = dataHotel.filter((item) =>{
+  //             const itemData = item.name ? item.name.toUpperCase() : ""
+  //               return itemData.indexOf();
+  //         })
+  //         setdataHotel(newData)
+  //     }
+  //     else{
+  //       setdataHotel(dataHotel)
+  //     }
+  // }
 
   return (
     <SafeAreaView style={style.backGround}>
@@ -111,13 +111,15 @@ const Home = ({navigation}) => {
           {/* Thanh ReSreach */}
 
           <View style={style.ReSreach}>
+
             <TextInput
               style={style.textInput}
-              placeholder="Tìm kiếm khách sạn"
+              placeholder="Seacrh hotel "
               onChangeText={(value) => {
                 searchItem(value)
               }}
             />
+            <AntDesign name="search1" size={16} style={style.iconSreach} />
           </View>
 
           {/* Story */}
@@ -169,10 +171,10 @@ const Home = ({navigation}) => {
             <View style={style.Voucher}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {dataVoucher.map((voucherApi, index) => (
-                 
+
                   <View style={style.VoucherImage1} key={index.toString()}>
                     <Image
-                    
+
                       source={{
                         uri: voucherApi.imageurl,
                       }}
@@ -185,47 +187,170 @@ const Home = ({navigation}) => {
           </View>
 
           {/* Hotel */}
-          <View style={{height: 450}}>
+          <View>
             <View style={style.Experience}>
               <Text style={style.textExperience}> Hotel </Text>
             </View>
 
-            <View>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View >
+              <ScrollView showsHorizontalScrollIndicator={false} >
                 {dataHotel.map((hotelApi, index) => (
-                  <TouchableOpacity
-                    key={index.toString()}
-                    style={style.HotelTouch}
-                    onPress={() => {
-                      navigation.navigate('Hotel');
-                    }}>
-                    <Image
-                      source={{
-                        uri: hotelApi.imageurl,
-                      }}
-                      style={style.HotelTouchImage}
-                    />
-                    <View style={style.HotelText}>
-                      <Text style={style.HotelName}>{hotelApi.name}</Text>
-                      <Text style={style.HotelStar}>
-                        <AntDesign name="star" size={16} />
-                        <AntDesign name="star" size={16} />
-                        <AntDesign name="star" size={16} />
-                        <AntDesign name="star" size={16} />
-                        <AntDesign name="star" size={16} />
-                      </Text>
-                      <Text style={style.HotelPrice}>
-                        {catChuoi(hotelApi.price)}
-                      </Text>
-                      <Text style={style.HotelPriceNew}>
-                        {catChuoi(hotelApi.disscount)}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
+                  <View style={{ marginTop: 10, }}>
+                    <TouchableOpacity
+                      key={index.toString()}
+                      style={style.HotelTouch}
+                      onPress={() => {
+                        navigation.navigate('Hotel');
+                      }}>
+                      <Image
+                        source={{
+                          uri: hotelApi.imageurl,
+                        }}
+                        style={style.HotelTouchImage}
+                      />
+                      <View style={style.HotelText}>
+                        <View>
+                          <Text style={style.HotelName}>{hotelApi.name}</Text>
+                        </View>
+
+
+                        <View>
+                          <Text>sdda</Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                          <View>
+                            <Text style={style.HotelPrice}>
+                              $26/Night
+                            </Text>
+                          </View>
+
+                          <View>
+                            <Text style={style.HotelStar}>
+                              <AntDesign name="star" size={16} />
+                              <Text style={style.Hotel_start_reviews} >
+                                4.9 (160 Reviews)
+                              </Text>
+                            </Text>
+                          </View>
+
+
+
+                        </View>
+
+
+
+                      </View>
+                    </TouchableOpacity>
+                  </View>
                 ))}
               </ScrollView>
             </View>
           </View>
+
+
+
+          {/* Recomended Hotel */}
+          <View>
+
+            <View style={style.Experience}>
+              <Text style={style.textExperience}> Recomended Hotel </Text>
+            </View>
+
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={style.recommed_hotel}>
+              
+              <View>
+                <Image style={style.recommed_hotel_image}
+                  source={require('../../Image/hanoi.jpg')}
+                />
+              </View>
+
+              <View>
+                <Text style={style.recommed_hotel_text}>Grand Park City Hotel</Text>
+              </View>
+
+              <View>
+                <Text>adsdd</Text>
+              </View>
+
+              <View style={style.recommed_hotel_border}></View>
+              <View style={{  flexDirection: 'row',}}>
+
+                <View style={{  flexDirection: 'row',marginLeft: 10,marginTop:10,}}>
+                  <Icon name="bed" size={21} style={{marginRight:5, color:'#4e93ff'}} />
+                  <Text>2 Beds</Text>
+                </View>
+
+                <View style={{  flexDirection: 'row',marginLeft: 25, marginTop:10,}}>
+                  <Icon name="wifi" size={21} style={{marginRight:5, color:'#4e93ff'}}/>
+                  <Text>2 Beds</Text>
+                </View>
+
+                <View style={{  flexDirection: 'row', marginLeft: 25,marginTop:10,}}>
+                  <Icon name="bed" size={21} style={{marginRight:5, color:'#4e93ff'  }}/>
+                  <Text>2 Beds</Text>
+                </View>
+              </View>
+            </View>
+
+
+
+            <View style={style.recommed_hotel}>
+              
+              <View>
+                <Image style={style.recommed_hotel_image}
+                  source={require('../../Image/hanoi.jpg')}
+                />
+              </View>
+
+              <View>
+                <Text style={style.recommed_hotel_text}>Grand Park City Hotel</Text>
+              </View>
+
+              <View>
+                <Text>adsdd</Text>
+              </View>
+
+              <View style={style.recommed_hotel_border}></View>
+              <View style={{  flexDirection: 'row',}}>
+
+                <View style={{  flexDirection: 'row',marginLeft: 10,marginTop:10,}}>
+                  <Icon name="bed" size={21} style={{marginRight:5, color:'#4e93ff'}} />
+                  <Text>2 Beds</Text>
+                </View>
+
+                <View style={{  flexDirection: 'row',marginLeft: 25, marginTop:10,}}>
+                  <Icon name="wifi" size={21} style={{marginRight:5, color:'#4e93ff'}}/>
+                  <Text>2 Beds</Text>
+                </View>
+
+                <View style={{  flexDirection: 'row', marginLeft: 25,marginTop:10,}}>
+                  <Icon name="bed" size={21} style={{marginRight:5, color:'#4e93ff'  }}/>
+                  <Text>2 Beds</Text>
+                </View>
+              </View>
+            </View>
+             
+             
+             
+             
+             
+             
+              </ScrollView>
+          </View>
+
+
+
+
+
+
+
+
+
+
+
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -235,9 +360,8 @@ export default Home;
 
 const style = StyleSheet.create({
   backGround: {
-    backgroundColor: '#84c8eb',
-    width: windowWidth,
-    height: windowHeight,
+    backgroundColor: '#e3eeee',
+
   },
 
   LogoName: {
@@ -277,12 +401,13 @@ const style = StyleSheet.create({
   ReSreach: {
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
   textInput: {
     width: 350,
     height: 50,
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 17,
     padding: 10,
   },
 
@@ -300,14 +425,14 @@ const style = StyleSheet.create({
     marginLeft: 20,
   },
 
-  // Experience
+  // Experience 
   Experience: {
     marginTop: 15,
     marginLeft: 20,
   },
   textExperience: {
     color: '#115d6d',
-    fontSize: 18,
+    fontSize: 20,
   },
 
   Touch: {
@@ -340,9 +465,12 @@ const style = StyleSheet.create({
   },
   // Hotel Touch
   HotelTouch: {
-    width: 120,
+    width: 350,
+    borderRadius: 20,
     marginTop: 5,
     marginLeft: 20,
+    backgroundColor: '#FFFFFF',
+    flexDirection: "row",
   },
   HotelTouch1: {
     width: 120,
@@ -350,35 +478,69 @@ const style = StyleSheet.create({
     marginLeft: 20,
   },
   HotelTouchImage: {
-    width: 120,
-    height: 150,
+    width: 80,
+    height: 80,
     borderRadius: 10,
+    margin: 10,
   },
   HotelText: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    width: 230,
   },
   HotelName: {
     color: '#453F3F',
-    width: 120,
-    height: 40,
+    marginTop: 15,
     marginLeft: 10,
+    fontSize: 15,
+    fontWeight: '700',
+
   },
-  HotelTextName: {
-    fontSize: 13,
-    padding: 3,
-  },
+
   HotelStar: {
-    color: '#ddfb5b',
-    marginTop: 5,
+    color: '#f2f63c',
+    margin: 10,
   },
   HotelPrice: {
-    color: '#576E74',
-    textDecorationLine: 'line-through',
+
+    margin: 10,
     fontSize: 13,
+    color: '#5c7dff',
   },
-  HotelPriceNew: {
-    color: '#E01E1E',
-    fontSize: 18,
+
+  iconSreach: {
+    position: 'absolute',
+    right: 40,
   },
+  recommed_hotel: {
+    backgroundColor: "#FFFFFF",
+    height: 210,
+    width: 300,
+    marginLeft: 20,
+    marginTop: 15,
+    borderRadius: 17,
+  },
+  Hotel_start_reviews: {
+    fontSize: 13,
+    color: '#5c7dff'
+  },
+  recommed_hotel_image: {
+    width: '93%',
+    height: 80,
+    borderRadius: 10,
+    margin: 10,
+  },
+  recommed_hotel_text: {
+    color: '#453F3F',
+    marginTop: 5,
+    marginLeft: 10,
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  recommed_hotel_border: {
+    backgroundColor: '#bed2d7',
+    width: '90%',
+    height: 1,
+    marginTop: 5,
+    marginLeft: 15,
+  }
 });

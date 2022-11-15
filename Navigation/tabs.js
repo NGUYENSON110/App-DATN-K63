@@ -8,7 +8,7 @@ import Inbox from '../Screens/InboxSreen/Inbox';
 import Feather from 'react-native-vector-icons/Feather';
 import Profile from '../Screens/ProfileSceen/Profile';
 import Hotel from '../Screens/HomeScreen/Hotel';
-import Saved from '../Screens/SavedScreen/Saved';
+import Sreach from '../Screens/SearchScreen/SreachScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -48,7 +48,7 @@ const Tabs = () => {
 
           <Tab.Screen
             name="Tago"
-            component={Saved}
+            component={Sreach}
             options={{
               tabBarLabel: '',
               tabBarIcon: ({color, size}) => (
