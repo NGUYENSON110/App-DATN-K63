@@ -63,10 +63,17 @@ const LoginLogo = () => {
 };
 
 const LoginInput = () => {
-  const navigation = useNavigation();
-  const [userName, setuserName] = useState('');
-  const [password, setPassword] = useState('');
   
+  const navigation = useNavigation();
+  const [userName, setUserName] = useState('');
+  const [passWord, setPassword] = useState('');
+    
+  // console.log("userName:", userName)
+  // console.log("password: ",password)
+  const newUser = {
+    username: userName,
+    password : passWord,
+  };
 
   return (
     <View style={styles.LoginInput}>
@@ -76,7 +83,7 @@ const LoginInput = () => {
           placeholder="UserName"
           style={{color: '#475569'}}
           keyboardType="email-address"
-          onChangeText={value => setuserName(value)}
+          onChangeText={value => setUserName(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
       </View>

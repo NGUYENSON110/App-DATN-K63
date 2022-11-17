@@ -54,10 +54,11 @@ const Home = ({ navigation }) => {
     const fetchDataHotel = async () => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/hotel`);
       setdataHotel(result.data);
-      console.log('222222', dataHotel);
+      // console.log('222222', dataHotel);
     };
     fetchDataHotel();
   }, []);
+  
 
   // API VOUCHER
   useEffect(() => {
@@ -115,9 +116,9 @@ const Home = ({ navigation }) => {
             <TextInput
               style={style.textInput}
               placeholder="Seacrh hotel "
-              onChangeText={(value) => {
-                searchItem(value)
-              }}
+              // onChangeText={(value) => {
+              //   searchItem(value)
+              // }}
             />
             <AntDesign name="search1" size={16} style={style.iconSreach} />
           </View>

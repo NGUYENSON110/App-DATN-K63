@@ -10,7 +10,10 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import Entypo from "react-native-vector-icons/Entypo"
 
 
-function Profile() {
+function Profile({ navigation }) {
+
+
+  
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -88,7 +91,11 @@ function Profile() {
                 </View>
 
                 <View style={{ marginLeft: -100, }}>
-                  <Text style={{ fontSize: 15, fontWeight: '500' }}> My Favourite </Text>
+                  <TouchableOpacity onPress={()=>{
+                      navigation.navigate('Favourite')
+                  }}>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}> My Favourite </Text>
+                  </TouchableOpacity>
                 </View>
 
                 <View>
@@ -166,25 +173,6 @@ function Profile() {
               </View>
             </TouchableOpacity>
             </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

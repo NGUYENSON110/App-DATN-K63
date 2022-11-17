@@ -42,7 +42,7 @@ const Inbox = () => {
         <View>
           {/* Back */}
 
-          <View style={style.iconBack}>
+          {/* <View style={style.iconBack}>
             <TouchableOpacity style={style.iconBack}
                onPress ={() =>{
                 navigation.navigate('Home')
@@ -51,7 +51,7 @@ const Inbox = () => {
               <Ionicons name="chevron-back" size={20} />
               <Text> Back </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* Inbox */}
 

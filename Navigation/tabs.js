@@ -10,6 +10,7 @@ import Profile from '../Screens/ProfileSceen/Profile';
 import Hotel from '../Screens/HomeScreen/Hotel';
 import Sreach from '../Screens/SearchScreen/SreachScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Octicons from "react-native-vector-icons/Octicons"
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -42,7 +43,7 @@ const Tabs = () => {
             options={{
               tabBarLabel: '',
               tabBarIcon: ({color, size}) => (
-                <Feather name="home" color={color} size={26} />
+                <Octicons name="home" color={color} size={26} />
               ),
             }}></Tab.Screen>
 
@@ -52,7 +53,7 @@ const Tabs = () => {
             options={{
               tabBarLabel: '',
               tabBarIcon: ({color, size}) => (
-                <AntDesign name="tago" size={23} color={color} />
+                <Octicons name="codescan-checkmark" size={25} color={color} />
               ),
             }}
           />
@@ -62,7 +63,7 @@ const Tabs = () => {
             options={{
               tabBarLabel: '',
               tabBarIcon: ({color, size}) => (
-                <AntDesign name="message1" size={23} color={color} />
+                <Octicons name="cross-reference" size={25} color={color} />
               ),
             }}
           />
@@ -73,7 +74,7 @@ const Tabs = () => {
             options={{
               tabBarLabel: '',
               tabBarIcon: ({color, size}) => (
-                <Icon name="user-o" size={23} color={color} />
+                <Octicons name="person" size={25} color={color} />
               ),
             }}
           />

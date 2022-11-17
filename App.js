@@ -14,9 +14,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SetPassword from './Screens/LoginScreen/setPassword';
 import Home from './Screens/HomeScreen/Home';
 import Index from './Screens/Test/index';
+import Favourite from './Screens/ProfileSceen/myFavourite/Favourite';
 import CreateNewAcc from './Screens/LoginScreen/CreateNewAcc';
 import ForgotPassword from './Screens/LoginScreen/ForgotPassword';
 import {AuthProvider} from './Screens/context/conText';
+import Profile from './Screens/ProfileSceen/Profile';
 // import Login from './Screens/LoginScreen/abc';
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -28,12 +30,14 @@ const App = () => {
     // <Index />
     // <Explore/>
     // <Home />
+    // <Favourite />
     <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Login"
           screenOptions={{
             headerShown: false,
+            
           }}>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="CreateNewAcc" component={CreateNewAcc} />
@@ -42,6 +46,8 @@ const App = () => {
           <Stack.Screen name="DetailsEx" component={DetailsEx} />
           <Stack.Screen name="Hotel" component={Hotel} />
           <Stack.Screen name="Tabs" component={Tabs} />
+          <Stack.Screen name="Favourite" component={Favourite} />
+          <Stack.Screen name="Profile" component={Profile}/>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

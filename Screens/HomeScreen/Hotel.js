@@ -162,9 +162,9 @@ const Hotel = ({ navigation }) => {
           <View style={style.Btn_comment_book_container}>
 
 
-            <View style={{backgroundColor:'#FFFFFF', width:80, marginLeft: 20, marginTop: 10, borderRadius: 30, alignItems:'center'}}>
-              <TouchableOpacity style={{padding: 10,}}>
-                <Octicons name="comment" size={40} />
+            <View style={{backgroundColor:'#FFFFFF', width:80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems:'center'}}>
+              <TouchableOpacity style={{padding: 12,}}>
+                <Octicons name="comment" size={33} />
               </TouchableOpacity>
             </View>
 
@@ -231,14 +231,14 @@ const style = StyleSheet.create({
 
   // Button
   button_Book: {
-    width: 250,
-    height: 65,
+    width: 230,
+    height: 50,
     backgroundColor: '#5171e9',
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight:15,
-    marginTop:10,
+    marginTop:15,
   },
   Btn_comment_book_container:{
     flexDirection:'row',
