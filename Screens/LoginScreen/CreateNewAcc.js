@@ -65,7 +65,7 @@ const LoginInput = () => {
   const [userName, setuserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const {register} = useContext(AuthContext);
+  // const {register} = useContext(AuthContext); 
 
   console.log(userName);
   console.log(password);
@@ -134,9 +134,11 @@ const LoginInput = () => {
               justifyContent: 'center',
               padding: 13,
             }}
-            onPress={() => {
-              register(userName,email,password);
-            }}>
+            // onPress={() => {
+            //   register(userName,email,password);
+            // }}
+            
+            >
             <Text style={{color: 'white'}}>Create Account</Text>
           </TouchableOpacity>
         </LinearGradient>

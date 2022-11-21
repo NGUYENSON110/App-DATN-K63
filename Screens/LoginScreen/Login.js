@@ -16,6 +16,7 @@ import { AuthContext } from '../context/conText';
 
 
 
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -68,12 +69,14 @@ const LoginInput = () => {
   const [userName, setUserName] = useState('');
   const [passWord, setPassword] = useState('');
     
-  // console.log("userName:", userName)
-  // console.log("password: ",password)
-  const newUser = {
-    username: userName,
-    password : passWord,
-  };
+  const { login, userToken } = useContext( AuthContext );
+  
+  console.log(userName)
+  console.log(passWord)
+
+  
+
+
 
   return (
     <View style={styles.LoginInput}>
@@ -83,6 +86,7 @@ const LoginInput = () => {
           placeholder="UserName"
           style={{color: '#475569'}}
           keyboardType="email-address"
+          value={userName}
           onChangeText={value => setUserName(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
@@ -101,6 +105,7 @@ const LoginInput = () => {
             placeholder="Password"
             style={{color: '#475569'}}
             secureTextEntry={true}
+            value={passWord}
             onChangeText={value => setPassword(value)}
           />
 
@@ -109,6 +114,7 @@ const LoginInput = () => {
               navigation.navigate('ForgotPassword');
             }}>
             <Text style={{fontSize: 15}}>Forgot?</Text>
+            
           </TouchableOpacity>
         </View>
 
@@ -120,9 +126,10 @@ const LoginInput = () => {
           colors={['#8AB50C', '#2C816B']}
           style={{borderRadius: 5}}>
           <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Tabs');
-            }}
+            // onPress={() => {
+            //   navigation.navigate('Tabs');
+            // }}
+            onPress={()=>{login(userName,passWord)}}
             style={{
               width: windowWidth - 60,
               alignItems: 'center',

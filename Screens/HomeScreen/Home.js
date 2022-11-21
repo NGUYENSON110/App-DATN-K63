@@ -44,7 +44,7 @@ const Home = ({ navigation }) => {
     const fetchData = async () => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/address`);
       setDataAddress(result.data);
-      console.log('111111111', dataAddress);
+      // console.log('111111111', dataAddress);
     };
     fetchData();
   }, []);
@@ -65,7 +65,7 @@ const Home = ({ navigation }) => {
     const fetchDataVoucher = async () => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/voucher`);
       setVoucher(result.data);
-      console.log('333333', dataVoucher);
+      // console.log('333333', dataVoucher);
     };
     fetchDataVoucher();
   }, []);

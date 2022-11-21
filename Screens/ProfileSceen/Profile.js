@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,11 +8,12 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Entypo from "react-native-vector-icons/Entypo"
+import { AuthContext } from '../context/conText';
 
 
 function Profile({ navigation }) {
 
-
+  const {logout} = useContext(AuthContext);
   
   return (
     <SafeAreaView>
@@ -162,9 +163,15 @@ function Profile({ navigation }) {
                   <Entypo name="log-out" size={25} style={{color:'red'}}/>
                 </View>
 
+                <TouchableOpacity 
+                    onPress={()=>{logout()}}
+               >
                 <View style={{ marginLeft: -100, }}>
                   <Text style={{ fontSize: 15, fontWeight: '500', color:'#f5434d' }}> Log Out </Text>
                 </View>
+
+                </TouchableOpacity>
+               
 
                 <View>
                   <MaterialIcons name="navigate-next" size={25} />
