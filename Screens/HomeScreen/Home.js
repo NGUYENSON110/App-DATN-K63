@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,6 +27,7 @@ import Switch2 from '../ImageLocationScreen/Switch2';
 import Switch3 from '../ImageLocationScreen/Switch3';
 import axios from 'axios';
 import catChuoi from '../Catchuoi/catChuoi';
+import { AuthContext } from '../context/conText';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -38,6 +39,11 @@ const Home = ({ navigation }) => {
   const [dataAddress, setDataAddress] = useState([]);
   const [dataHotel, setdataHotel] = useState([]);
   const [dataVoucher, setVoucher] = useState([]);
+  const {userInfo} = useContext(AuthContext);
+
+
+  // console.log("userInfo12321: ", userInfo.username)
+  // console.log("email: ", userInfo)
 
   // API ADDRESS
   useEffect(() => {
@@ -97,7 +103,7 @@ const Home = ({ navigation }) => {
               </View>
 
               <View>
-                <Text style={style.textName}> An Sơn</Text>
+                {/* <Text style={style.textName}>{userInfo.user.username}</Text> */}
               </View>
             </View>
 

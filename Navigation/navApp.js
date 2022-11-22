@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './Login/AuthStack';
 import Tabs from './Tabs/tabs';
 import { AuthContext } from "../Screens/context/conText"
-
+import AppStack from './Component/AppStack';
 function navApp() {
 
   const { isLoading, userToken } = useContext(AuthContext);
@@ -22,6 +22,7 @@ function navApp() {
   return (
     <NavigationContainer>
       {userToken !== null ? <Tabs /> : <AuthStack />}
+      {/* <AppStack /> */}
     </NavigationContainer>
   )
 }
