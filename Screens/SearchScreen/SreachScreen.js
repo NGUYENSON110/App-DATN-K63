@@ -20,6 +20,7 @@ import axios from "axios";
 const Sreach = ({ navigation }) => {
 
   const [dataHotel, setdataHotel] = useState([]);
+  const [dataRecommnedHotel, setReCommendHotel] = useState([]);
 
   // API HOTEL
   useEffect(() => {
@@ -30,6 +31,17 @@ const Sreach = ({ navigation }) => {
     };
     fetchDataHotel();
   }, []);
+
+  // API RECOMMEND HOTEL
+  useEffect(() => {
+    const fetchDataRecommnedHotel = async () => {
+      const result = await axios.get(`http://10.0.2.2:5000/v1/recommendHotel`);
+      setReCommendHotel(result.data);
+      // console.log('RecommnedHotel : ', dataRecommnedHotel);
+    };
+    fetchDataRecommnedHotel();
+  }, [])
+
 
 
   return (
@@ -68,67 +80,59 @@ const Sreach = ({ navigation }) => {
 
           <View>
 
-            <View style={{marginTop: 10,marginLeft:10,}}>
-              <Text style={{fontSize: 15, fontWeight: '700',}}> Popular Hotels </Text>
+            <View style={{ marginTop: 10, marginLeft: 10, }}>
+              <Text style={{ fontSize: 15, fontWeight: '700', }}> Popular Hotels </Text>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={style.recommed_hotel}>
+            <ScrollView>
+              {
+                dataRecommnedHotel.map((RecommnedHotelApi, index) => (
+                  <TouchableOpacity key={index.toString()}
+                    onPress={() => {
+                      navigation.navigate('Hotel');
+                    }}
+                  >
+                    <View style={style.recommed_hotel}>
 
-                <View>
-                  <Image style={style.recommed_hotel_image}
-                    source={require('../../Image/hanoi.jpg')}
-                  />
-                </View>
+                      <View>
+                        <Image style={style.recommed_hotel_image}
+                          source={{ uri: RecommnedHotelApi.imageurl }}
+                        />
+                      </View>
 
-                <View style={{position:'absolute', backgroundColor:'#FFFFFF', right:0, margin: 10, borderRadius: 10,}}>
-                <View>
-                    <Text style={style.HotelStar}>
-                      <AntDesign name="star" size={16} />
-                      <Text style={style.Hotel_start_reviews} >
-                        4.9 
-                      </Text>
-                    </Text>
-                  </View>
-                </View>
+                      <View>
+                        <Text style={style.recommed_hotel_text}>{RecommnedHotelApi.name}</Text>
+                      </View>
 
-                <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                      <View style={{ marginLeft: 10, }}>
+                        <Text style={{ fontSize: 13, color: '#A9A9A9' }}>{RecommnedHotelApi.address}</Text>
+                      </View>
 
-                  <View>
-                    <Text style={style.recommed_hotel_text}>Grand Park City Hotel</Text>
-                  </View>
+                      <View style={style.recommed_hotel_border}></View>
+                      <View style={{ flexDirection: 'row', }}>
 
-                  <View style={{color:'#4e93ff', marginRight: 15,marginTop: 10,}}>
-                    <Text>$44</Text>
-                  </View>
+                        <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
+                          <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                          <Text>{RecommnedHotelApi.bed}bed</Text>
+                        </View>
 
-                </View>
+                        <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
+                          <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                          <Text>2 Beds</Text>
+                        </View>
 
-                <View>
-                  <Text>adsdd</Text>
-                </View>
-
-                <View style={style.recommed_hotel_border}></View>
-                <View style={{ flexDirection: 'row', }}>
-
-                  <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
-                    <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                    <Text>2 Beds</Text>
-                  </View>
-
-                  <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
-                    <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                    <Text>2 Beds</Text>
-                  </View>
-
-                  <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
-                    <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                    <Text>2 Beds</Text>
-                  </View>
-                </View>
-              </View>
+                        <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
+                          <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                          <Text>2 Beds</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                ))
+              }
 
             </ScrollView>
+
           </View>
 
 
@@ -187,9 +191,9 @@ const style = StyleSheet.create({
   recommed_hotel_image: {
     width: '100%',
     height: 130,
-    borderTopRightRadius:10,
-    borderTopLeftRadius:10,
-  
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+
   },
   recommed_hotel_text: {
     color: '#453F3F',
@@ -209,7 +213,7 @@ const style = StyleSheet.create({
     color: '#f2f63c',
     margin: 5,
   },
-   Hotel_start_reviews: {
+  Hotel_start_reviews: {
     fontSize: 13,
     color: '#5c7dff'
   },

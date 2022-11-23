@@ -6,7 +6,7 @@ import CreateNewAcc from '../../Screens/LoginScreen/CreateNewAcc';
 import SetPassword from '../../Screens/LoginScreen/setPassword';
 
 const Stack = createNativeStackNavigator();
-
+ 
 function AuthStack() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}  initialRouteName="Login">
