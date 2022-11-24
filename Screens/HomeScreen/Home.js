@@ -165,30 +165,7 @@ const Home = ({ navigation }) => {
             </View>
           </View>
 
-          {/* Voucher */}
 
-          <View>
-            <View style={style.Experience}>
-              <Text style={style.textExperience}> Voucher </Text>
-            </View>
-
-            <View style={style.Voucher}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {dataVoucher.map((voucherApi, index) => (
-
-                  <View style={style.VoucherImage1} key={index.toString()}>
-                    <Image
-
-                      source={{
-                        uri: voucherApi.imageurl,
-                      }}
-                      style={style.ImageVoucher}
-                    />
-                  </View>
-                ))}
-              </ScrollView>
-            </View>
-          </View>
 
           {/* Hotel */}
           <View>
@@ -204,7 +181,7 @@ const Home = ({ navigation }) => {
                       key={index.toString()}
                       style={style.HotelTouch}
                       onPress={() => {
-                        navigation.navigate('Hotel',{
+                        navigation.navigate('Hotel', {
                           hotelApi
                         });
                       }}>
@@ -265,7 +242,7 @@ const Home = ({ navigation }) => {
                 dataRecommnedHotel.map((RecommnedHotelApi, index) => (
                   <TouchableOpacity key={index.toString()}
                     onPress={() => {
-                      navigation.navigate('RecommendHotel',{
+                      navigation.navigate('RecommendHotel', {
                         RecommnedHotelApi
                       });
                     }}
@@ -274,7 +251,7 @@ const Home = ({ navigation }) => {
 
                       <View>
                         <Image style={style.recommed_hotel_image}
-                          source={{uri:RecommnedHotelApi.imageurl}}
+                          source={{ uri: RecommnedHotelApi.imageurl }}
                         />
                       </View>
 
@@ -282,8 +259,8 @@ const Home = ({ navigation }) => {
                         <Text style={style.recommed_hotel_text}>{RecommnedHotelApi.name}</Text>
                       </View>
 
-                      <View style={{marginLeft:10,}}>
-                        <Text style={{fontSize: 13, color:'#A9A9A9'}}>{RecommnedHotelApi.address}</Text>
+                      <View style={{ marginLeft: 10, }}>
+                        <Text style={{ fontSize: 13, color: '#A9A9A9' }}>{RecommnedHotelApi.address}</Text>
                       </View>
 
                       <View style={style.recommed_hotel_border}></View>
@@ -312,7 +289,30 @@ const Home = ({ navigation }) => {
             </ScrollView>
           </View>
 
+          {/* Voucher */}
 
+          <View>
+            <View style={style.Experience}>
+              <Text style={style.textExperience}> Voucher </Text>
+            </View>
+
+            <View style={style.Voucher}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {dataVoucher.map((voucherApi, index) => (
+
+                  <View style={style.VoucherImage1} key={index.toString()}>
+                    <Image
+
+                      source={{
+                        uri: voucherApi.imageurl,
+                      }}
+                      style={style.ImageVoucher}
+                    />
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
+          </View>
 
 
 

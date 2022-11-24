@@ -35,14 +35,15 @@ const Sreach = ({ navigation }) => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/recommendHotel`);
       setReCommendHotel(result.data);
       // console.log('RecommnedHotel : ', dataRecommnedHotel);
-      setDataSreachnewItem(dataRecommnedHotel)
+       setDataSreachnewItem(dataRecommnedHotel)
+      console.log("aaaa", dataSreachnewItem)
     };
     fetchDataRecommnedHotel();
   }, [])
 
-  const sreachDatahotel = (text) => {
+  const sreachDatahotel =  (text) => {
     if (text) {
-      const newData = dataRecommnedHotel.filter(item => {
+       const newData = dataRecommnedHotel.filter(item => {
         const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         return itemData.includes(text.toUpperCase());
       })
