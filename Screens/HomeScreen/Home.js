@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
               </View>
 
               <View>
-                <Text style={style.textName}>{userInfo.user.username}</Text>
+                {/* <Text style={style.textName}>{userInfo.user.username}</Text> */}
               </View>
             </View>
 
@@ -204,7 +204,9 @@ const Home = ({ navigation }) => {
                       key={index.toString()}
                       style={style.HotelTouch}
                       onPress={() => {
-                        navigation.navigate('Hotel');
+                        navigation.navigate('Hotel',{
+                          hotelApi
+                        });
                       }}>
                       <Image
                         source={{
@@ -263,7 +265,9 @@ const Home = ({ navigation }) => {
                 dataRecommnedHotel.map((RecommnedHotelApi, index) => (
                   <TouchableOpacity key={index.toString()}
                     onPress={() => {
-                      navigation.navigate('Hotel');
+                      navigation.navigate('RecommendHotel',{
+                        RecommnedHotelApi
+                      });
                     }}
                   >
                     <View style={style.recommed_hotel}>

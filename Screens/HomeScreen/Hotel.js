@@ -1,5 +1,5 @@
-import { faL, fas } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+
+import React, { useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -15,13 +15,16 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Octicons  from "react-native-vector-icons/Octicons"
+import Octicons from "react-native-vector-icons/Octicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "./Home";
 
 
-const Hotel = ({ navigation }) => {
+const Hotel = ({ route, navigation }) => {
+  const { hotelApi } = route.params;
+  const [numberLines, setNumberLines] = useState(2)
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -50,7 +53,7 @@ const Hotel = ({ navigation }) => {
           >
             <View style={style.HotelImg}>
               <Image
-                source={require("../../Image/melisa.jpg")}
+                source={{ uri: hotelApi.imageurl }}
                 style={style.ImgMelisa}
               />
             </View>
@@ -79,7 +82,7 @@ const Hotel = ({ navigation }) => {
 
           <View style={style.Hotel}>
             <View style={style.NameHotel}>
-              <Text style={style.NameHotelText}> Malisa Khánh Hòa Hotel</Text>
+              <Text style={style.NameHotelText}> {hotelApi.name}</Text>
             </View>
 
             <View style={{
@@ -88,24 +91,38 @@ const Hotel = ({ navigation }) => {
             }}>
               <View style={{ flexDirection: "row", marginTop: 10, }}>
                 <AntDesign name="enviroment" size={15} style={{ color: '#5c7dff' }} />
-                <Text style={{ marginLeft: 7, }}>Ádads</Text>
+                <Text style={{ marginLeft: 5, position: 'relative', bottom: 3, fontSize: 13, color: '#828e87', width: 190, lineHeight: 18, }}>{hotelApi.address}</Text>
               </View>
 
               <View>
-                <Text style={{ color: "#FFCE31", marginRight: 20, }}>
-                  <AntDesign name="star" size={15} />
-                  <Text>4.2(84 Reviews)</Text>
+                <Text style={{ marginRight: 20, marginTop: 10, }}>
+                  <AntDesign name="star" size={15} style={{ color: "#FFCE31" }} />
+                  <Text style={{ color: "#5c7dff" }}>4.2
+                    <Text style={{ color: '#828e87' }}>(84 Reviews)</Text>
+                  </Text>
                 </Text>
               </View>
             </View>
 
             <View style={{ flexDirection: 'row', marginTop: 10, }}>
-              <Text style={{ color: '#5c7dff' }}>$46</Text>
+              <Text style={{ color: '#5c7dff' }}>${hotelApi.price}</Text>
               <Text style={{ marginLeft: 5, }}>Per Night</Text>
             </View>
 
             <View style={{ marginTop: 5, }}>
-              <Text>áddđsđâsdasdasdasdasdasdsad</Text>
+              <Text numberOfLines={numberLines} style={{ fontSize: 13, lineHeight: 18, }}>
+                Tọa lạc tại một vị trí thuận tiện ở quận Hoàn Kiếm thuộc thành phố Hà Nội,
+                Hanoi {hotelApi.name} nằm cách Ô Quan Chưởng chưa đầy 1 km,
+                Nhà hát múa rối nước Thăng Long 13 phút đi bộ và Hồ Hoàn Kiếm
+              </Text>
+
+              <TouchableOpacity style={{ marginTop: 10, }}
+                onPress={() => {
+                  setNumberLines(5)
+                }}
+              >
+                <Text style={{ fontSize: 13, color: '#66ccf2' }}>View More</Text>
+              </TouchableOpacity>
             </View>
 
           </View>
@@ -114,22 +131,22 @@ const Hotel = ({ navigation }) => {
 
             <View style={{ alignItems: 'center' }}>
               <FontAwesome name="feed" size={21} style={{ marginRight: 5, color: '#19190b' }} />
-              <Text>Wifi</Text>
+              <Text style={{ color: "#9ba6a0", fontSize: 13, }}>Wifi</Text>
             </View>
 
             <View style={{ alignItems: 'center' }}>
               <FontAwesome name="bath" size={21} style={{ marginRight: 5, color: '#19190b' }} />
-              <Text>Shower</Text>
+              <Text style={{ color: "#9ba6a0", fontSize: 13, }}>Shower</Text>
             </View>
 
             <View style={{ alignItems: 'center' }}>
               <MaterialIcons name="free-breakfast" size={21} style={{ marginRight: 5, color: '#19190b' }} />
-              <Text>Breakfast</Text>
+              <Text style={{ color: "#9ba6a0", fontSize: 13, }}>Breakfast</Text>
             </View>
 
             <View style={{ alignItems: 'center' }}>
               <FontAwesome name="credit-card" size={21} style={{ marginRight: 5, color: '#19190b' }} />
-              <Text>Card</Text>
+              <Text style={{ color: "#9ba6a0", fontSize: 13, }}>Card</Text>
             </View>
 
           </View>
@@ -162,8 +179,8 @@ const Hotel = ({ navigation }) => {
           <View style={style.Btn_comment_book_container}>
 
 
-            <View style={{backgroundColor:'#FFFFFF', width:80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems:'center'}}>
-              <TouchableOpacity style={{padding: 12,}}>
+            <View style={{ backgroundColor: '#FFFFFF', width: 80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems: 'center' }}>
+              <TouchableOpacity style={{ padding: 12, }}>
                 <Octicons name="comment" size={33} />
               </TouchableOpacity>
             </View>
@@ -173,7 +190,7 @@ const Hotel = ({ navigation }) => {
               <TouchableOpacity style={style.button_Book}>
                 <Text style={{
                   fontSize: 24,
-                  color:'#FFFFFF'
+                  color: '#FFFFFF'
                 }}>
                   BOOK NOW
                 </Text>
@@ -237,11 +254,11 @@ const style = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight:15,
-    marginTop:15,
+    marginRight: 15,
+    marginTop: 15,
   },
-  Btn_comment_book_container:{
-    flexDirection:'row',
-    justifyContent:'space-between'
+  Btn_comment_book_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });

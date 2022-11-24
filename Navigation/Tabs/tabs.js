@@ -7,13 +7,13 @@ import Home from '../../Screens/HomeScreen/Home';
 import DetailsEx from '../../Screens/HomeScreen/DetailsEx';
 import Hotel from '../../Screens/HomeScreen/Hotel';
 import Inbox from '../../Screens/InboxSreen/Inbox';
-import Feather from 'react-native-vector-icons/Feather';
 import Profile from '../../Screens/ProfileSceen/Profile';
-
+import RecommendHotel from '../../Screens/HomeScreen/RecommendHotel';
+// import ScreachScreenDetails from '../../Screens/SearchScreen/SreachScreenDetails/ScreachScreenDetails';
 import Sreach from '../../Screens/SearchScreen/SreachScreen';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Octicons from "react-native-vector-icons/Octicons"
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Octicons from "react-native-vector-icons/Octicons";
+import Favourite from "../../Screens/ProfileSceen/myFavourite/Favourite"
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Tab = createBottomTabNavigator();
@@ -26,6 +26,9 @@ const HomeStack = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="DetailsEx" component={DetailsEx} />
       <Stack.Screen name="Hotel" component={Hotel} />
+      <Stack.Screen name="RecommendHotel" component={RecommendHotel} />
+      {/* <Stack.Screen name="ScreachScreenDetails" component={ScreachScreenDetails} /> */}
+      <Stack.Screen name="Favourite" component={Favourite} />
     </Stack.Navigator>
   )
 }

@@ -22,7 +22,7 @@ const Favourite = ({ navigation }) => {
           <View >
             <TouchableOpacity style={{ flexDirection: 'row', marginTop: 15, marginLeft: 5 }}
               onPress={() => {
-                navigation.goBack()
+                navigation.navigate('Profile')
               }}
             >
               <AntDesign name="left" size={17} />

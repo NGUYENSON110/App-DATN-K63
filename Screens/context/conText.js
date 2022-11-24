@@ -21,13 +21,13 @@ export const AuthProvider = ({ children }) => {
       password
     })
       .then(res => {
-        console.log("data", res.data);
+        // console.log("data", res.data);
         setUserInfor(res.data);
         setUserToken(res.data.token)
         AsyncStorage.setItem('userInfo', JSON.stringify(res.data))
         AsyncStorage.setItem('userToken', res.data.token)
 
-        console.log("email", res.data.user.email)
+        // console.log("email", res.data.user.email)
       })
       .catch((error) => {
         console.log("login false: ", error)

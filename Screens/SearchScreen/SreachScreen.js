@@ -15,22 +15,19 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
+import { cos, Value } from "react-native-reanimated";
 
 
 const Sreach = ({ navigation }) => {
 
-  const [dataHotel, setdataHotel] = useState([]);
-  const [dataRecommnedHotel, setReCommendHotel] = useState([]);
 
-  // API HOTEL
-  useEffect(() => {
-    const fetchDataHotel = async () => {
-      const result = await axios.get(`http://10.0.2.2:5000/v1/hotel`);
-      setdataHotel(result.data);
-      // console.log('222222', dataHotel);
-    };
-    fetchDataHotel();
-  }, []);
+  const [searchItem, setDatasreachItem] = useState('')
+  const [dataRecommnedHotel, setReCommendHotel] = useState([]);
+  const [dataSreachnewItem, setDataSreachnewItem] = useState([]);
+
+  // console.log("1231: ", searchItem)
+
+
 
   // API RECOMMEND HOTEL
   useEffect(() => {
@@ -38,9 +35,24 @@ const Sreach = ({ navigation }) => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/recommendHotel`);
       setReCommendHotel(result.data);
       // console.log('RecommnedHotel : ', dataRecommnedHotel);
+      setDataSreachnewItem(dataRecommnedHotel)
     };
     fetchDataRecommnedHotel();
   }, [])
+
+  const sreachDatahotel = (text) => {
+    if (text) {
+      const newData = dataRecommnedHotel.filter(item => {
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+        return itemData.includes(text.toUpperCase());
+      })
+      setDataSreachnewItem(newData);
+      // console.log("newData:",dataSreachnewItem )
+    } else {
+      setDataSreachnewItem(dataRecommnedHotel)
+    }
+    // console.log("text", text)
+  }
 
 
 
@@ -69,9 +81,8 @@ const Sreach = ({ navigation }) => {
             <TextInput
               style={style.textInput}
               placeholder="Seacrh hotel "
-              onChangeText={(value) => {
-                searchItem(value)
-              }}
+              onChangeText={(value) => sreachDatahotel(value)}
+
             />
             <AntDesign name="search1" size={16} style={style.iconSreach} />
           </View>
@@ -86,10 +97,12 @@ const Sreach = ({ navigation }) => {
 
             <ScrollView>
               {
-                dataRecommnedHotel.map((RecommnedHotelApi, index) => (
+                dataSreachnewItem.map((RecommnedHotelApi, index) => (
                   <TouchableOpacity key={index.toString()}
                     onPress={() => {
-                      navigation.navigate('Hotel');
+                      navigation.navigate('RecommendHotel', {
+                        RecommnedHotelApi
+                      });
                     }}
                   >
                     <View style={style.recommed_hotel}>
