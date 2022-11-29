@@ -12,7 +12,11 @@ import RecommendHotel from '../../Screens/HomeScreen/RecommendHotel';
 // import ScreachScreenDetails from '../../Screens/SearchScreen/SreachScreenDetails/ScreachScreenDetails';
 import Sreach from '../../Screens/SearchScreen/SreachScreen';
 import Octicons from "react-native-vector-icons/Octicons";
-import Favourite from "../../Screens/ProfileSceen/myFavourite/Favourite"
+import Favourite from "../../Screens/ProfileSceen/myFavourite/Favourite";
+import admin from '../../Screens/ProfileSceen/admin/admin';
+import createAccout from '../../Screens/ProfileSceen/admin/createAccount/createAccout';
+import createAddress from '../../Screens/ProfileSceen/admin/createAddress/createAddress';
+import createHotel from '../../Screens/ProfileSceen/admin/createHotel/createHotel';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -27,8 +31,12 @@ const HomeStack = () => {
       <Stack.Screen name="DetailsEx" component={DetailsEx} />
       <Stack.Screen name="Hotel" component={Hotel} />
       <Stack.Screen name="RecommendHotel" component={RecommendHotel} />
+      <Stack.Screen name="admin" component={admin} />
       {/* <Stack.Screen name="ScreachScreenDetails" component={ScreachScreenDetails} /> */}
       <Stack.Screen name="Favourite" component={Favourite} />
+      <Stack.Screen name="createAccout" component={createAccout} />
+      <Stack.Screen name="createAddress" component={createAddress} />
+      <Stack.Screen name="createHotel" component={createHotel} />
     </Stack.Navigator>
   )
 }

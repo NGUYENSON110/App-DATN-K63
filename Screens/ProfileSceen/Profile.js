@@ -13,8 +13,8 @@ import { AuthContext } from '../context/conText';
 
 function Profile({ navigation }) {
 
-  const {logout} = useContext(AuthContext);
-  
+  const { logout, userInfo } = useContext(AuthContext);
+  console.log("123", userInfo.user.admin)
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -92,8 +92,8 @@ function Profile({ navigation }) {
                 </View>
 
                 <View style={{ marginLeft: -100, }}>
-                  <TouchableOpacity onPress={()=>{
-                      navigation.navigate('Favourite')
+                  <TouchableOpacity onPress={() => {
+                    navigation.navigate('Favourite')
                   }}>
                     <Text style={{ fontSize: 15, fontWeight: '500' }}> My Favourite </Text>
                   </TouchableOpacity>
@@ -108,80 +108,110 @@ function Profile({ navigation }) {
 
 
             <View>
-            <TouchableOpacity>
-              <View style={{
-                flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
-                backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
-              }}>
-                <View>
-                  <Ionicons name="time-outline" size={25} />
-                </View>
+              <TouchableOpacity>
+                <View style={{
+                  flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
+                  backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
+                }}>
+                  <View>
+                    <Ionicons name="time-outline" size={25} />
+                  </View>
 
-                <View style={{ marginLeft: -100, }}>
-                  <Text style={{ fontSize: 15, fontWeight: '500' }}> Transaction </Text>
-                </View>
+                  <View style={{ marginLeft: -100, }}>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}> Transaction </Text>
+                  </View>
 
-                <View>
-                  <MaterialIcons name="navigate-next" size={25} />
-                </View>
+                  <View>
+                    <MaterialIcons name="navigate-next" size={25} />
+                  </View>
 
-              </View>
-            </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
             </View>
 
 
             <View>
-            <TouchableOpacity>
-              <View style={{
-                flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
-                backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
-              }}>
-                <View>
-                  <Ionicons name="pricetag-outline" size={25} />
-                </View>
+              <TouchableOpacity>
+                <View style={{
+                  flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
+                  backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
+                }}>
+                  <View>
+                    <Ionicons name="pricetag-outline" size={25} />
+                  </View>
 
-                <View style={{ marginLeft: -100, }}>
-                  <Text style={{ fontSize: 15, fontWeight: '500' }}> My Cupon </Text>
-                </View>
+                  <View style={{ marginLeft: -100, }}>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}> My Cupon </Text>
+                  </View>
 
-                <View>
-                  <MaterialIcons name="navigate-next" size={25} />
-                </View>
+                  <View>
+                    <MaterialIcons name="navigate-next" size={25} />
+                  </View>
 
-              </View>
-            </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
             </View>
 
 
-            <View>
-            <TouchableOpacity>
-              <View style={{
-                flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
-                backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
-              }}>
-                <View>
-                  <Entypo name="log-out" size={25} style={{color:'red'}}/>
-                </View>
 
+
+            {userInfo.user.admin
+              ?
+              <View>
                 <TouchableOpacity 
-                    onPress={()=>{logout()}}
-               >
-                <View style={{ marginLeft: -100, }}>
-                  <Text style={{ fontSize: 15, fontWeight: '500', color:'#f5434d' }}> Log Out </Text>
-                </View>
+                  onPress={() => {navigation.navigate('admin')}}
+                >
+                  <View style={{
+                    flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
+                    backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
+                  }}>
+                    <View>
+                      <Ionicons name="person-outline" size={25} />
+                    </View>
 
+                    <View style={{ marginLeft: -100, }}>
+                      <Text style={{ fontSize: 15, fontWeight: '500', marginLeft:-20, }}> Admin </Text>
+                    </View>
+
+                    <View>
+                      <MaterialIcons name="navigate-next" size={25} />
+                    </View>
+
+                  </View>
                 </TouchableOpacity>
-               
-
-                <View>
-                  <MaterialIcons name="navigate-next" size={25} />
-                </View>
-
               </View>
-            </TouchableOpacity>
+              : <View></View>}
+
+
+            <View>
+              <TouchableOpacity>
+                <View style={{
+                  flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
+                  backgroundColor: '#FFFFFF', padding: 20, borderRadius: 20,
+                }}>
+                  <View>
+                    <Entypo name="log-out" size={25} style={{ color: 'red' }} />
+                  </View>
+
+                  <TouchableOpacity
+                    onPress={() => { logout() }}
+                  >
+                    <View style={{ marginLeft: -100, }}>
+                      <Text style={{ fontSize: 15, fontWeight: '500', color: '#f5434d' }}> Log Out </Text>
+                    </View>
+
+                  </TouchableOpacity>
+
+
+                  <View>
+                    <MaterialIcons name="navigate-next" size={25} />
+                  </View>
+
+                </View>
+              </TouchableOpacity>
             </View>
 
-
+           
 
 
 

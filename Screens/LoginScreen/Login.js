@@ -74,7 +74,6 @@ const LoginInput = () => {
 
   const handleCheckUserName = (text) => {
     let regexUsername = /^[a-z0-9_-]{6,16}$/;
-    
     setUserName(text)
     if(regexUsername.test(text)){
       setCheckValidateUserName(false)
@@ -83,16 +82,16 @@ const LoginInput = () => {
     }
   }
 
-  const handleCheckpassword = (text) =>{
-    let regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // const handleCheckpassword = (text) =>{
+  //   let regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-      setPassword(text)
-    if(regexPassword.test(text)){
-      setCheckValidatepassWord(false)
-    } else {
-      setCheckValidatepassWord(true)
-    }
-  }
+  //     setPassword(text)
+  //   if(regexPassword.test(text)){
+  //     setCheckValidatepassWord(false)
+  //   } else {
+  //     setCheckValidatepassWord(true)
+  //   }
+  // }
   
 
 
@@ -132,7 +131,7 @@ const LoginInput = () => {
             value={passWord}
             // onChangeText={value => setPassword(value)}
             onChangeText={(text)=>{
-                handleCheckpassword(text)
+              setPassword(text)
             }}
           />
 
@@ -147,10 +146,10 @@ const LoginInput = () => {
         </View>
 
         <View style={styles.UserNameUnderlined}></View>
-        {checkValidatepassWord ? <Text style={styles.regexusername}>Password requires 1 capital letter and 1 number</Text> : passWord === ''? <Text style={styles.regexusername}></Text> : <Text style={styles.regexusername}></Text> }
+        {/* {checkValidatepassWord ? <Text style={styles.regexusername}>Password requires 1 capital letter and 1 number</Text> : passWord === ''? <Text style={styles.regexusername}></Text> : <Text style={styles.regexusername}></Text> } */}
       </View>
 
-      <View style={{ marginTop: 25 }}>
+      <View style={{ marginTop: 5 }}>
         <LinearGradient
           colors={['#8AB50C', '#2C816B']}
           style={{ borderRadius: 5 }}>
@@ -223,7 +222,6 @@ const SignIn = () => {
         <TouchableOpacity
           style={{
             flexDirection: 'row',
-            marginTop: 10,
             borderRadius: 5,
             padding: 13,
             width: windowWidth - 60,
@@ -233,13 +231,13 @@ const SignIn = () => {
           }}>
           <Image
             source={require('../../Image/LogoApple.png')}
-            style={{ width: 20, height: 25, marginLeft: 20 }}
+            style={{ width: 20, height: 25, marginLeft: 10 }}
           />
           <Text style={{ marginLeft: 10 }}>Sign in with Apple</Text>
         </TouchableOpacity>
       </View>
       {/* Create Account */}
-      <View style={{ marginTop: 5 }}>
+      <View style={{  }}>
         <View style={{ flexDirection: 'row', padding: 5 }}>
           <Text
             style={{
@@ -256,11 +254,11 @@ const SignIn = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <TouchableOpacity>
             <Text style={{ color: '#101010' }}>Not Now</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </View>
   );

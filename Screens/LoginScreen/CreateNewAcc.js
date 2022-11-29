@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -6,13 +6,14 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
-import {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Dimensions} from 'react-native';
+import { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
-import {AuthContext} from '../context/conText';
+import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/conText';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -38,12 +39,12 @@ const CreateLogo = () => {
       <View style={styles.background}>
         <Image
           source={require('../../Image/Subtract.png')}
-          style={{width: 400, height: 340}}
+          style={{ width: 400, height: 340 }}
         />
         <View style={styles.LogoRingMe}>
           <Image
             source={require('../../Image/LogoRingMe.png')}
-            style={{width: 150, height: 50}}
+            style={{ width: 150, height: 50 }}
             resizeMode="center"
           />
         </View>
@@ -51,7 +52,7 @@ const CreateLogo = () => {
         <View style={styles.CreateLogo}>
           <Image
             source={require('../../Image/CreateAcc.png')}
-            style={{width: 200, height: 80}}
+            style={{ width: 200, height: 80 }}
             resizeMode="center"
           />
         </View>
@@ -65,28 +66,57 @@ const LoginInput = () => {
   const [userName, setuserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  // const {register} = useContext(AuthContext); 
+  const [checkValidateUserName, setCheckValidateUserName] = useState(false)
+  const [checkValidatepassWord, setCheckValidatepassWord] = useState(false)
+  const [checkValidateemail, setCheckValidateEmail] = useState(false)
+  const { register } = useContext(AuthContext);
 
-  console.log(userName);
-  console.log(password);
-  console.log(email);
+
+
+  const handleCheckEmail = (text) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    setEmail(text)
+    if (reg.test(text) === false) {
+      setCheckValidateEmail(false);
+    } else {
+      setCheckValidateEmail(true);
+    }
+  }
+
+  const handleCheckpassword = (text) => {
+    let regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    setPassword(text)
+    if (regexPassword.test(text)) {
+      setCheckValidatepassWord(false)
+    } else {
+      setCheckValidatepassWord(true)
+    }
+  }
+  console.log('email', email)
+  console.log('username', userName)
+  console.log('password', password)
+
+
 
   return (
     <View style={styles.CreateAccInput}>
-      <View style={{width: windowWidth - 60}}>
+      <View style={{ width: windowWidth - 60 }}>
         <TextInput
           placeholder="FullName"
-          style={{color: '#475569'}}
+          style={{ color: '#475569' }}
           keyboardType="email-address"
+          value={userName}
           onChangeText={value => setuserName(value)}
         />
         <View style={styles.UserNameUnderlined}></View>
+        {checkValidateUserName ? <Text style={styles.regexusername}>Account requires 6 letters and numbers</Text> : <Text style={styles.regexusername}></Text>}
       </View>
 
-      <View style={{width: windowWidth - 60}}>
+      <View style={{ width: windowWidth - 60 }}>
         <TextInput
           placeholder="Email address or phone number"
-          style={{color: '#475569'}}
+          style={{ color: '#475569' }}
           keyboardType="email-address"
           onChangeText={value => setEmail(value)}
         />
@@ -104,7 +134,7 @@ const LoginInput = () => {
           }}>
           <TextInput
             placeholder="Password"
-            style={{color: '#475569'}}
+            style={{ color: '#475569' }}
             secureTextEntry={pwHidden ? true : false}
             onChangeText={value => setPassword(value)}
           />
@@ -115,7 +145,7 @@ const LoginInput = () => {
             }}>
             <Image
               source={require('../../Image/Vector.png')}
-              style={{width: 21, height: 15, marginRight: 10}}
+              style={{ width: 21, height: 15, marginRight: 10 }}
             />
           </TouchableOpacity>
         </View>
@@ -123,10 +153,10 @@ const LoginInput = () => {
         <View style={styles.UserNameUnderlined}></View>
       </View>
 
-      <View style={{marginTop: 25}}>
+      <View style={{ marginTop: 25 }}>
         <LinearGradient
           colors={['#8AB50C', '#2C816B']}
-          style={{borderRadius: 5}}>
+          style={{ borderRadius: 5 }}>
           <TouchableOpacity
             style={{
               width: windowWidth - 60,
@@ -134,12 +164,12 @@ const LoginInput = () => {
               justifyContent: 'center',
               padding: 13,
             }}
-            // onPress={() => {
-            //   register(userName,email,password);
-            // }}
+          onPress={() => {
+            register(userName,password,email)
             
-            >
-            <Text style={{color: 'white'}}>Create Account</Text>
+          }}
+          >
+            <Text style={{ color: 'white' }}>Create Account</Text>
           </TouchableOpacity>
         </LinearGradient>
       </View>
@@ -151,9 +181,9 @@ const SignIn = () => {
   const navigation = useNavigation();
   return (
     <View
-      style={{alignItems: 'center', justifyContent: 'center', marginTop: 15}}>
-      <View style={{marginTop: 5}}>
-        <View style={{flexDirection: 'row', padding: 5}}>
+      style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+      <View style={{ marginTop: 5 }}>
+        <View style={{ flexDirection: 'row', padding: 5 }}>
           <Text
             style={{
               color: '#828282',
@@ -163,7 +193,7 @@ const SignIn = () => {
           <TouchableOpacity
             style={{}}
             onPress={() => navigation.navigate('Login')}>
-            <Text style={{color: '#101010', marginLeft: 10}}>Login</Text>
+            <Text style={{ color: '#101010', marginLeft: 10 }}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -192,4 +222,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#CBD5E1',
     marginTop: -3,
   },
+  regexusername: {
+    color: 'red',
+    marginLeft: 2,
+    marginTop: 5,
+  }
 });

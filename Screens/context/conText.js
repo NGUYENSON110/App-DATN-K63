@@ -32,12 +32,31 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => {
         console.log("login false: ", error)
       })
-   
+
     setIsLoading(false);
-    if(username == '' || password == ''){
-        Alert.alert('Please enter username and password')
+    if (username == '' || password == '') {
+      Alert.alert('Please enter username and password')
+    } 
+    
+
+  }
+
+  const register = (username, password, email) => {
+    axios.post(`http://10.0.2.2:5000/v1/auth/register`, {
+      username,
+      password,
+      email
+    })
+      .then(res => {
+        console.log("data", res.data)
+      })
+      .catch((error) => {
+        console.log("resgister false: ", error)
+      });
+    if (username == '' || password == '' || email == '') {
+      Alert.alert('Please enter username and password and email')
     }
-  } 
+  }
 
   const logout = () => {
     setIsLoading(true);
@@ -47,26 +66,26 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
   }
 
-  const isLoggedIn = async () => {
-    try {
-      setIsLoading(true);
-      let userInfo = AsyncStorage.getItem('userInfo');
-      let userToken = AsyncStorage.getItem('userToken');
+  // const isLoggedIn = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     let userInfo = AsyncStorage.getItem('userInfo');
+  //     let userToken = AsyncStorage.getItem('userToken');
+  //     setUserInfor(userInfo);
+  //     setUserToken(userToken);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.log("LoggedIn : ", error)
+  //   }
 
-      setUserToken(userToken);
-      setIsLoading(false);
-    } catch (error) {
-      console.log("LoggedIn : ", error)
-    }
+  // }
 
-  }
-
-  useEffect(() => {
-    isLoggedIn();
-  }, []);
+  // useEffect(() => {
+  //   isLoggedIn();
+  // }, []);
 
   return (
-    <AuthContext.Provider value={{ login, logout, isLoading, userToken, userInfo }}>
+    <AuthContext.Provider value={{ login, register, logout, isLoading, userToken, userInfo }}>
       {children}
     </AuthContext.Provider>
   )
