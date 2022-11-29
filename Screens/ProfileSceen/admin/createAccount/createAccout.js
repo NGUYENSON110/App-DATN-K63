@@ -43,13 +43,13 @@ const CreateLogo = ({ navigation }) => {
             {/* Logo RingMe */}
 
             <View style={styles.background}>
-               
+
                 <Image
                     source={require('../../../../Image/Subtract.png')}
                     style={{ width: 400, height: 340 }}
-                    
+
                 />
-                 <View style={styles.iconBack}>
+                <View style={styles.iconBack}>
                     <TouchableOpacity style={styles.iconBack}
                         onPress={() => {
                             navigation.navigate('admin')
@@ -134,6 +134,9 @@ const LoginInput = () => {
             .catch((error) => {
                 console.log("resgister false: ", error)
             });
+        if (username == "" || password == "" || email == "") {
+            Alert.alert("Please enter username, password, !")
+        }
 
     };
 
@@ -260,7 +263,7 @@ const styles = StyleSheet.create({
     iconBack: {
         flexDirection: "row",
         marginTop: 10,
-        position:'relative',
+        position: 'relative',
         top: -160,
     },
 });

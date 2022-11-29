@@ -35,7 +35,7 @@ const windowHeight = Dimensions.get('window').height;
 // const NameLocals = ['Nha trang', 'HCM', 'Đà Lạt', 'Đà Nẵng'];
 
 const Home = ({ navigation }) => {
-  const [NameLocalType, setNameLocalType] = useState('Nha trang');
+  const [NameLocalType, setNameLocalType] = useState("Nha Trang");
   const [dataAddress, setDataAddress] = useState([]);
   const [dataHotel, setdataHotel] = useState([]);
   const [dataVoucher, setVoucher] = useState([]);
@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
     const fetchData = async () => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/address`);
       setDataAddress(result.data);
-      // console.log('111111111', dataAddress);
+      console.log('111111111', result.data.name);
     };
     fetchData();
   }, []);
@@ -143,7 +143,7 @@ const Home = ({ navigation }) => {
                     marginLeft: 20,
                   }}
                   onPress={() => {
-                    setNameLocalType(NameLocal);
+                    setNameLocalType(NameLocal.name);
                   }}>
                   <Text>{NameLocal.name}</Text>
                 </TouchableOpacity>
@@ -158,10 +158,11 @@ const Home = ({ navigation }) => {
             </View>
 
             <View>
-              <Switch />
-              {/* {NameLocalType == 'Hồ Chí Minh' ? <Switch1 /> : null}
-                {NameLocalType == 'Hà Nội' ? <Switch2 /> : null}
-                {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null} */}
+              {/* <Switch /> */}
+              {NameLocalType == 'Nha trang' ? <Switch /> : null}
+              {NameLocalType == 'Hồ Chí Minh' ? <Switch1 /> : null}
+              {NameLocalType == 'Hà Nội' ? <Switch2 /> : null}
+              {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null}
             </View>
           </View>
 
@@ -273,12 +274,12 @@ const Home = ({ navigation }) => {
 
                         <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
                           <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                          <Text>2 Beds</Text>
+                          <Text>Wifi</Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
-                          <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                          <Text>2 Beds</Text>
+                          <Icon name="child" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                          <Text>Free</Text>
                         </View>
                       </View>
                     </View>
