@@ -1,17 +1,44 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../api/config';
-import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import { ADD_TO_CART, DELETE_ADD_CART } from "./types"
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+
   const [isLoading, setIsLoading] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfor] = useState(null);
 
+  const initialState = {
+    cartItem: []
+  };
+  
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case ADD_TO_CART: {
+        return {
+          ...state,
+          cartItem: [...state.cartItem, action.payload]
+        }
+      }
+
+      case DELETE_ADD_CART: {
+        return {
+          ...state,
+          cartItem: state.cartItem.filter(item => item.id !== action.payload)
+        }
+      }
+      default:
+        return state
+    }
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log("cardItem", initialState.cartItem)
 
   const login = (username, password) => {
     setIsLoading(true);
@@ -36,8 +63,8 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
     if (username == '' || password == '') {
       Alert.alert('Please enter username and password')
-    } 
-    
+    }
+
 
   }
 
@@ -84,8 +111,17 @@ export const AuthProvider = ({ children }) => {
   //   isLoggedIn();
   // }, []);
 
+  const addToCart = (item) => {
+    dispatch({ type: ADD_TO_CART, payload: item })
+    console.log("aaaa",item )
+  }
+
+  const removeItem = (id) => {
+    dispatch({ type: DELETE_ADD_CART, payload: id })
+  }
+
   return (
-    <AuthContext.Provider value={{ login, register, logout, isLoading, userToken, userInfo }}>
+    <AuthContext.Provider value={{ login, register, logout, isLoading, userToken, userInfo, addToCart, removeItem, cartItem: state.cartItem }}>
       {children}
     </AuthContext.Provider>
   )

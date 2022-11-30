@@ -88,7 +88,7 @@ const Switch = ({ DetailsEx }) => {
               navigation.navigate('DetailsEx');
             }}>
             <Image
-              source={{url: item.imageurl}}
+              source={{uri: item.imageurl}}
               style={style.TouchImage}
             />
           </TouchableOpacity>

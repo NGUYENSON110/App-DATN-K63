@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -11,9 +11,13 @@ import {
 } from 'react-native';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../context/conText";
 
 const Favourite = ({ navigation }) => {
+  const { cartItem} = useContext(AuthContext);
+  console.log("aaaa", cartItem)
+  
   return (
     <SafeAreaView>
       <ScrollView>
@@ -35,42 +39,49 @@ const Favourite = ({ navigation }) => {
             <Text style={{ fontSize: 17, fontWeight: '500', }}>Favourite Items</Text>
           </View>
 
+            {
+              cartItem.map((item,index)=>(
+                <View style={style.recommed_hotel} key={index}>
 
-          <View style={style.recommed_hotel}>
-
-            <View>
-              <Image style={style.recommed_hotel_image}
-                source={require('../../../Image/hanoi.jpg')}
-              />
-            </View>
-
-            <View>
-              <Text style={style.recommed_hotel_text}>Grand Park City Hotel</Text>
-            </View>
-
-            <View>
-              <Text>adsdd</Text>
-            </View>
-
-            <View style={style.recommed_hotel_border}></View>
-            <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
-
-              <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 10, }}>
-                <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                <Text>2 Beds</Text>
+                <View>
+                  <Image style={style.recommed_hotel_image}
+                    source={{uri: item.imageurl}}
+                  />
+                </View>
+    
+                <View>
+                  <Text style={style.recommed_hotel_text}>{item.name}</Text>
+                </View>
+    
+                <View>
+                  <Text>adsdd</Text>
+                </View>
+    
+                <View style={style.recommed_hotel_border}></View>
+                <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+    
+                  <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 10, }}>
+                    <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                    <Text>2 Beds</Text>
+                  </View>
+    
+                  <View style={{ flexDirection: 'row', marginTop: 10, }}>
+                    <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                    <Text>2 Beds</Text>
+                  </View>
+    
+                  <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 20 }}>
+                    <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                    <Text>2 Beds</Text>
+                  </View>
+                </View>
               </View>
+              ))
+            }
 
-              <View style={{ flexDirection: 'row', marginTop: 10, }}>
-                <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                <Text>2 Beds</Text>
-              </View>
+         
 
-              <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 20 }}>
-                <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                <Text>2 Beds</Text>
-              </View>
-            </View>
-          </View>
+          
 
         </View>
       </ScrollView>

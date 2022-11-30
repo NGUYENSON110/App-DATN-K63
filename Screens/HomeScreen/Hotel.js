@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -11,6 +11,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ImageBackground,
+  Alert,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -19,12 +20,26 @@ import Octicons from "react-native-vector-icons/Octicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "./Home";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../context/conText";
 
 
 const Hotel = ({ route, navigation }) => {
   const { hotelApi } = route.params;
   const [numberLines, setNumberLines] = useState(2)
-
+  const { addToCart } = useContext(AuthContext);
+  // const favoriteHotel = async () => {
+  //   try {
+  //     const favorite = hotelApi;
+  //     console.log("favorite", favorite)
+  //     await AsyncStorage.setItem("favoriteHotel", JSON.stringify(favorite));
+  //     const bcd = await AsyncStorage.getItem("favoriteHotel")
+  //     console.log("abc", bcd)
+  //   } catch (error) {
+  //     Alert.alert("Error:", error)
+  //   }
+  // }
+  console.log("aaaa", addToCart)
   return (
     <SafeAreaView>
       <ScrollView>
@@ -81,8 +96,21 @@ const Hotel = ({ route, navigation }) => {
           {/* Name HoTel */}
 
           <View style={style.Hotel}>
-            <View style={style.NameHotel}>
-              <Text style={style.NameHotelText}> {hotelApi.name}</Text>
+            <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+
+              <View>
+                <Text style={style.NameHotelText}> {hotelApi.name}</Text>
+              </View>
+
+              <View style={{ marginRight: 30, marginTop: 5, }}>
+                <TouchableOpacity
+                  onPress={() => addToCart(hotelApi)}
+                >
+
+                  <AntDesign name="hearto" size={15} style={{ color: '#e75785' }} />
+                </TouchableOpacity>
+              </View>
+
             </View>
 
             <View style={{
