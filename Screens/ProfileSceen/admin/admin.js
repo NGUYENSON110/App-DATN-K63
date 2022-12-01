@@ -26,10 +26,10 @@ function admin({ navigation }) {
                     </View>
 
                     <View>
-                        <TouchableOpacity 
-                        onPress={() => {
-                            navigation.navigate('createAccout')
-                        }}
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('createAccout')
+                            }}
                         >
                             <View style={{
                                 flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20,
@@ -77,7 +77,7 @@ function admin({ navigation }) {
                         </TouchableOpacity>
                     </View>
 
-                    <View>
+                    {/* <View>
                         <TouchableOpacity
                             onPress={() => {
                                 navigation.navigate('createAddress')
@@ -101,7 +101,7 @@ function admin({ navigation }) {
 
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     <View>
                         <TouchableOpacity

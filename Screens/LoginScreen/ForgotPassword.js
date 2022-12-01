@@ -36,16 +36,16 @@ const LoginLogo = () => {
       {/* Logo RingMe */}
       <View style={styles.background}>
         <Image
-          source={require('../../Image/Subtract.png')}
+          source={require('../../Image/imageLogin.png')}
           style={{width: 400, height: 340}}
         />
-        <View style={styles.LogoRingMe}>
+        {/* <View style={styles.LogoRingMe}>
           <Image
             source={require('../../Image/LogoRingMe.png')}
             style={{width: 150, height: 50}}
             resizeMode="center"
           />
-        </View>
+        </View> */}
 
         <View style={styles.Login}>
           <Image
@@ -135,7 +135,7 @@ const ButtonLogin = () => {
     <View style={styles.ButtonLogin}>
       <View>
         <LinearGradient
-          colors={['#8AB50C', '#2C816B']}
+          colors={['#5EDFFF', '#5EDFFF']}
           style={{borderRadius: 5}}>
           <TouchableOpacity
             onPress={() => {
@@ -154,7 +154,7 @@ const ButtonLogin = () => {
 
       <View style={{marginTop: 15}}>
         <LinearGradient
-          colors={['#8AB50C', '#2C816B']}
+          colors={['#5EDFFF', '#5EDFFF']}
           start={{x: 0.0, y: 1.0}}
           end={{x: 1.0, y: 1.0}}
           style={{borderRadius: 5}}>

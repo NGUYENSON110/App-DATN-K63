@@ -47,11 +47,11 @@ const CreateLogo = ({ }) => {
             <View style={styles.background}>
 
                 <Image
-                    source={require('../../../../Image/Subtract.png')}
+                    source={require('../../../../Image/imageLogin.png')}
                     style={{ width: 400, height: 340 }}
 
                 />
-                <View style={styles.iconBack}>
+                {/* <View style={styles.iconBack}>
                     <TouchableOpacity style={styles.iconBack}
                         onPress={() => {
                             navigation.navigate('admin')
@@ -60,7 +60,7 @@ const CreateLogo = ({ }) => {
                         <Ionicons name="chevron-back" size={20} />
                         <Text> Back </Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={styles.LogoRingMe}>
                     <Image
                         source={require('../../../../Image/LogoRingMe.png')}
@@ -212,7 +212,7 @@ const LoginInput = () => {
 
             <View style={{ marginTop: 25 }}>
                 <LinearGradient
-                    colors={['#8AB50C', '#2C816B']}
+                    colors={['#5EDFFF', '#5EDFFF']}
                     style={{ borderRadius: 5 }}>
                     <TouchableOpacity
                         style={{

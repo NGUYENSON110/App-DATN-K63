@@ -22,7 +22,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const Login = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView >
       <View>
         <LoginLogo />
         <LoginInput />
@@ -40,16 +40,16 @@ const LoginLogo = () => {
       {/* Logo RingMe */}
       <View style={styles.background}>
         <Image
-          source={require('../../Image/Subtract.png')}
+          source={require('../../Image/imageLogin.png')}
           style={{ width: 400, height: 340 }}
         />
-        <View style={styles.LogoRingMe}>
+        {/* <View style={styles.LogoRingMe}>
           <Image
             source={require('../../Image/LogoRingMe.png')}
             style={{ width: 150, height: 50 }}
             resizeMode="center"
           />
-        </View>
+        </View> */}
 
         <View style={styles.Login}>
           <Image
@@ -151,7 +151,7 @@ const LoginInput = () => {
 
       <View style={{ marginTop: 5 }}>
         <LinearGradient
-          colors={['#8AB50C', '#2C816B']}
+          colors={['#5EDFFF', '#5EDFFF']}
           style={{ borderRadius: 5 }}>
           <TouchableOpacity
 
