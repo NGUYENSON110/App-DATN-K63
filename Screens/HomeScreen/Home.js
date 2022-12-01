@@ -26,6 +26,7 @@ import Switch1 from '../ImageLocationScreen/Switch1';
 import Switch2 from '../ImageLocationScreen/Switch2';
 import Switch3 from '../ImageLocationScreen/Switch3';
 import axios from 'axios';
+import APIURL from "../api/config"
 import catChuoi from '../Catchuoi/catChuoi';
 import { AuthContext } from '../context/conText';
 
@@ -100,7 +101,7 @@ const Home = ({ navigation }) => {
               </View>
 
               <View>
-                {/* <Text style={style.textName}>{userInfo.user.username}</Text> */}
+                <Text style={style.textName}>{userInfo.user.username}</Text>
               </View>
             </View>
 
@@ -136,7 +137,7 @@ const Home = ({ navigation }) => {
                     width: 120,
                     height: 40,
                     backgroundColor:
-                      NameLocal === NameLocalType ? '#5EDFFF' : '#FFF',
+                      NameLocal.name === NameLocalType ? '#5EDFFF' : '#FFF',
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: 10,
@@ -162,7 +163,7 @@ const Home = ({ navigation }) => {
               {NameLocalType == 'Nha trang' ? <Switch /> : null}
               {NameLocalType == 'Hồ Chí Minh' ? <Switch1 /> : null}
               {NameLocalType == 'Hà Nội' ? <Switch2 /> : null}
-              {NameLocalType == 'Đà Nẵng' ? <Switch3 /> : null}
+              {NameLocalType == 'Đà Nẵng ' ? <Switch3 /> : null}
             </View>
           </View>
 
@@ -314,12 +315,6 @@ const Home = ({ navigation }) => {
               </ScrollView>
             </View>
           </View>
-
-
-
-
-
-
 
 
 

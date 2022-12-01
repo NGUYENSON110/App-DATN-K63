@@ -121,7 +121,7 @@ const LoginInput = () => {
                 <TextInput
                     placeholder="name Hotel"
                     style={{ color: '#475569' }}
-                    value={userName}
+                    // value={userName}
                     // onChangeText={value => handleCheckUserName(value)}
                 />
                 <View style={styles.UserNameUnderlined}></View>
@@ -209,9 +209,9 @@ const LoginInput = () => {
                             justifyContent: 'center',
                             padding: 13,
                         }}
-                        onPress={() => {
-                            fetchregister(userName, password, email, true)
-                        }}
+                        // onPress={() => {
+                        //     fetchregister(, password, email, true)
+                        // }}
                     >
                         <Text style={{ color: 'white' }}>Create Hotel</Text>
                     </TouchableOpacity>

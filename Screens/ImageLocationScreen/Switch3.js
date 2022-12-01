@@ -1,70 +1,217 @@
 import React, { Component } from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Image,
-    Dimensions,
-    TouchableOpacity,
-    ImageBackground,
-  } from 'react-native';
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Switch3 = ({ navigation }) =>{   
-    return (
-        <View>
-         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-             <TouchableOpacity
-                  style={style.Touch}
-                  onPress={() => {
-                    navigation.navigate('DetailsEx');
-                  }}>
-                  <Image
-                    source={require('../../Image/Hcm.jpg')}
-                    style={style.TouchImage}
-                  />
-                </TouchableOpacity>
+const Switch3 = ({  }) => {
+  const navigation = useNavigation();
+  const Data = [
+    {
+      name: "Cầu Rồng",
+      imageurl: "https://statics.vinpearl.com/dia-diem-du-lich-da-nang-3_1631853807.jpg",
+      description: "Ngoài các khu vui chơi dành cho gia đình và trẻ em, Vinpearl Land còn có Công viên nước Vinpearl. Với các đường trượt có độ dốc lớn nhất là 21.5m, khu vực giải trí này thường phục vụ những du khách ưa thích cảm giác mạnh. Trong đó, một đoạn Hang Rùng Rợn dài 56m cũng sẽ làm thoả mãn niềm đam mê thám hiểm của nhiều du khách trẻ tuổi. Hơn nữa, nơi này còn thu hút du khách bởi rạp chiếu phim 4D hoành tráng.",
+      food: [
+        {
+          name: "Bánh Mì Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091709/blog/erykuinxdtlo280gxm2d.webp",
+        },
+        {
+          name: "Xôi Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091731/blog/y8udm7xbqa6j76jrieq5.webp",
+        },
+        {
+          name: "Hải Sản - Ốc Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091748/blog/p63pe9h0ch1hjaxbbkp8.webp",
+        },
+        {
+          name: "Bánh Canh Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091766/blog/gulkyim0opnfqmavzztn.webp",
+        },
+        {
+          name: "Bún Mắm Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091784/blog/jcuwl0pxdu2ru743aiip.webp",
+        },
+        {
+          name: "Lẩu Thái Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
+        },
 
-                <TouchableOpacity style={style.Touch}>
-                  <Image
-                    source={require('../../Image/nhatrang.jpg')}
-                    style={style.TouchImage}
-                  />
-                </TouchableOpacity>
+      ]
+    },
+    {
+      name: "Núi Ngũ Hành Sơn",
+      imageurl: "https://statics.vinpearl.com/dia-diem-du-lich-da-nang-4_1631853895.jpg",
+      description: "Địa điểm du lịch này có trên 20.000 mẫu vật của 4.000 loại sinh vật biển được lưu giữ, sưu tầm và nuôi dưỡng trong nhiều năm. Đặc biệt, đây còn là nơi trưng bày một bộ xương cá voi khổng lồ có chiều dài gần 26m, cao 3m với 48 đốt sống đã được phục chế rất đầy đủ. Du khách đến đây sẽ được tham quan khu thí nghiệm, ngắm các sinh vật lạ và biết thêm nhiều điều về cuộc sống của các loài sinh vật ở biển.",
+      food: [
+        {
+          name: "Bánh Mì Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091709/blog/erykuinxdtlo280gxm2d.webp",
+        },
+        {
+          name: "Xôi Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091731/blog/y8udm7xbqa6j76jrieq5.webp",
+        },
+        {
+          name: "Hải Sản - Ốc Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091748/blog/p63pe9h0ch1hjaxbbkp8.webp",
+        },
+        {
+          name: "Bánh Canh Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091766/blog/gulkyim0opnfqmavzztn.webp",
+        },
+        {
+          name: "Bún Mắm Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091784/blog/jcuwl0pxdu2ru743aiip.webp",
+        },
+        {
+          name: "Lẩu Thái Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
+        },
+      ]
+    },
+    {
+      name: "Đèo Hải Vân",
+      imageurl: "https://statics.vinpearl.com/dia-diem-du-lich-da-nang-5_1631854132.jpg",
+      description: "Đến với đảo Hòn Mun là đến với làn nước xanh trong, bát ngát, đến với những bãi san hô phong phú và đầy màu sắc. Với sự phong phú trong hệ sinh thái như vậy, đảo Hòn Mun đã được Quỹ Động vật hoang dã thế giới đánh giá là khu vực đa dạng sinh vật biển bậc nhất Việt Nam.",
+      food: [
+        {
+          name: "Bánh Mì Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091709/blog/erykuinxdtlo280gxm2d.webp",
+        },
+        {
+          name: "Xôi Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091731/blog/y8udm7xbqa6j76jrieq5.webp",
+        },
+        {
+          name: "Hải Sản - Ốc Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091748/blog/p63pe9h0ch1hjaxbbkp8.webp",
+        },
+        {
+          name: "Bánh Canh Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091766/blog/gulkyim0opnfqmavzztn.webp",
+        },
+        {
+          name: "Bún Mắm Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091784/blog/jcuwl0pxdu2ru743aiip.webp",
+        },
+        {
+          name: "Lẩu Thái Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
+        },
+      ]
+    }
+    , {
+      name: "Suối Mơ",
+      imageurl: "https://statics.vinpearl.com/dia-diem-du-lich-da-nang-7_1631854639.jpg",
+      description: "Đảo Hòn Tằm nằm cách thành phố Nha Trang 7 km, là một điểm du lịch Nha Trang, trải nghiệm nhất định bạn phải ghé qua khi tới với thành phố. Đảo Hòn Tằm đẹp mộng mơ với những hàng dừa chạy dọc trên bãi biển xanh ngát. ",
+      food: [
+        {
+          name: "Bánh Mì Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091709/blog/erykuinxdtlo280gxm2d.webp",
+        },
+        {
+          name: "Xôi Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091731/blog/y8udm7xbqa6j76jrieq5.webp",
+        },
+        {
+          name: "Hải Sản - Ốc Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091748/blog/p63pe9h0ch1hjaxbbkp8.webp",
+        },
+        {
+          name: "Bánh Canh Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091766/blog/gulkyim0opnfqmavzztn.webp",
+        },
+        {
+          name: "Bún Mắm Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091784/blog/jcuwl0pxdu2ru743aiip.webp",
+        },
+        {
+          name: "Lẩu Thái Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
+        },
+      ]
+    }
+    , {
+      name: "Chùa Quan Âm",
+      imageurl: "https://statics.vinpearl.com/dia-diem-du-lich-da-nang-25_1631865474.jpg",
+      description: "Nha Trang không chỉ hấp dẫn với những bãi biển đẹp đến mê hồn người mà còn gây ấn tượng bởi những công trình kiến trúc độc đáo và đẹp mắt. Tháp bà Ponagar là một trong những quần thể kiến trúc văn hóa Chăm Pa lớn nhất ở miền Trung Việt Nam.",
+      food: [
+        {
+          name: "Bánh Mì Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091709/blog/erykuinxdtlo280gxm2d.webp",
+        },
+        {
+          name: "Xôi Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091731/blog/y8udm7xbqa6j76jrieq5.webp",
+        },
+        {
+          name: "Hải Sản - Ốc Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091748/blog/p63pe9h0ch1hjaxbbkp8.webp",
+        },
+        {
+          name: "Bánh Canh Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091766/blog/gulkyim0opnfqmavzztn.webp",
+        },
+        {
+          name: "Bún Mắm Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091784/blog/jcuwl0pxdu2ru743aiip.webp",
+        },
+        {
+          name: "Lẩu Thái Sài Gòn",
+          imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
+        },
+      ]
+    }
 
-                <TouchableOpacity style={style.Touch}>
-                  <Image
-                    source={require('../../Image/phuquoc.jpg')}
-                    style={style.TouchImage}
-                  />
-                </TouchableOpacity>
+  ]
+  return (
+    <View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {Data.map((item, index) => (
+          // console.log(item),
+          <TouchableOpacity
+            style={style.Touch}
+            onPress={() => {
+              navigation.navigate('DetailsEx', {
+                item
+              });
+            }}>
+            <Image
+              source={{ uri: item.imageurl }}
+              style={style.TouchImage}
+            />
+          </TouchableOpacity>
+        ))
 
-                <TouchableOpacity style={style.Touch}>
-                  <Image
-                    source={require('../../Image/phuquoc2.jpeg')}
-                    style={style.TouchImage}
-                  />
-                </TouchableOpacity>
-                </ScrollView>
-        </View>
-    )
+        }
+      </ScrollView>
+    </View>
+  )
 
 }
 export default Switch3;
 
 const style = StyleSheet.create({
-    Touch: {
-        width: 120,
-        height: 150,
-        marginTop: 5,
-        marginLeft: 20,
-      },
+  Touch: {
+    width: 120,
+    height: 150,
+    marginTop: 5,
+    marginLeft: 20,
+  },
 
-      TouchImage: {
-        width: 120,
-        height: 150,
-        borderRadius: 10,
-      },
+  TouchImage: {
+    width: 120,
+    height: 150,
+    borderRadius: 10,
+  },
 })

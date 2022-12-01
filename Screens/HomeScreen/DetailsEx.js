@@ -14,7 +14,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 
-const DetailsEx = ({ navigation }) => {
+const DetailsEx = ({ route, navigation }) => {
+
+  const { item } = route.params
+  // console.log("item", item.food[0])
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -23,7 +27,7 @@ const DetailsEx = ({ navigation }) => {
 
           <View style={style.iconBack}>
             <TouchableOpacity style={style.iconBack}
-               onPress ={() =>{
+              onPress={() => {
                 navigation.navigate('Home')
               }}
             >
@@ -34,7 +38,7 @@ const DetailsEx = ({ navigation }) => {
 
           {/*  Image */}
           <View style={{ marginLeft: 15, marginTop: 10 }}>
-            <Image source={require("../../Image/Hcm.jpg")} style={style.Image} />
+            <Image source={{ uri: item.imageurl }} style={style.Image} />
           </View>
 
           {/*  Text Review*/}
@@ -45,36 +49,37 @@ const DetailsEx = ({ navigation }) => {
               justifyContent: "center",
               width: 350,
               height: 80,
-            
+
               marginLeft: 15,
             }}
           >
             <Text style={{
-                fontSize : 15,
+              fontSize: 15,
             }}>
-              Thành phố Hồ Chí Minh, còn gọi bằng tên cũ phổ biến là Sài Gòn, là
+              {item.name}, còn gọi bằng tên cũ phổ biến là Sài Gòn, là
               thành phố lớn nhất ở Việt Nam về dân số và quy mô đô thị hóa .
             </Text>
           </View>
 
           {/* đồ ăn */}
           <View>
-              <View style={{ marginLeft: 15}}>
-                  <Text style={{ fontSize: 18}}>Món Ăn Ngon </Text>
-              </View>
-              <ScrollView horizontal style={style.ListFood} showsHorizontalScrollIndicator={false}>
-               
-                    <Image source={require('../../Image/vitquaydanang.png')} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 5}}/>
+            <View style={{ marginLeft: 15 }}>
+              <Text style={{ fontSize: 18 }}>Món Ăn Ngon </Text>
+            </View>
 
-                    <Image source={require('../../Image/monanhcm.png')} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 10,}}/>
-
-                    <Image source={require('../../Image/monanhcm1.png')} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 10,}}/>
-
-                    <Image source={require('../../Image/monanhcm2.png')} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 10,}}/>
+            <ScrollView horizontal style={style.ListFood} showsHorizontalScrollIndicator={false}>
+              {item.food.map((item, index) => (
 
 
-             
-              </ScrollView>
+
+                <View style={{flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                  <Image source={{ uri: item.imageurl }} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 5 }} />
+                  <Text style={{marginTop: 5, fontSize: 15,width: 100,}}>{item.name}</Text>
+                </View>
+              ))}
+
+
+            </ScrollView>
           </View>
           {/*  */}
         </View>
@@ -96,9 +101,10 @@ const style = StyleSheet.create({
     height: 400,
     borderRadius: 10,
   },
-//   ListFood
-ListFood:{
+  //   ListFood
+  ListFood: {
     marginLeft: 15,
-    marginTop: 5,
-}
+    marginTop: 10,
+    height: 150,
+  }
 });

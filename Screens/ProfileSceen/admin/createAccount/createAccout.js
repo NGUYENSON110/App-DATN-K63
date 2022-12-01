@@ -18,6 +18,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -37,7 +38,8 @@ const createAccout = () => {
 
 export default createAccout;
 
-const CreateLogo = ({ navigation }) => {
+const CreateLogo = ({ }) => {
+    const navigation = useNavigation();
     return (
         <View>
             {/* Logo RingMe */}

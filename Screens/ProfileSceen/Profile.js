@@ -14,7 +14,7 @@ import { AuthContext } from '../context/conText';
 function Profile({ navigation }) {
 
   const { logout, userInfo } = useContext(AuthContext);
-  console.log("123", userInfo.user.admin)
+  console.log("123", userInfo.user.email)
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,11 +43,11 @@ function Profile({ navigation }) {
             </View>
 
             <View style={{ marginTop: 20, }}>
-              <Text style={{ fontSize: 20, }}>Nguyễn An Sơn</Text>
+              <Text style={{ fontSize: 20, }}>{userInfo.user.username}</Text>
             </View>
 
             <View style={{ marginTop: 10, }}>
-              <Text style={{ fontSize: 14, }}>Nguyễn An Sơn</Text>
+              <Text style={{ fontSize: 14, }}>{userInfo.user.email}</Text>
             </View>
           </View>
 
