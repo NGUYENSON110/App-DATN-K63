@@ -39,7 +39,7 @@ const Hotel = ({ route, navigation }) => {
   //     Alert.alert("Error:", error)
   //   }
   // }
-  console.log("aaaa", addToCart)
+  
   return (
     <SafeAreaView>
       <ScrollView>

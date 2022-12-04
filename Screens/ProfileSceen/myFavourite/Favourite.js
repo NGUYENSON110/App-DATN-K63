@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../context/conText";
 
 const Favourite = ({ navigation }) => {
-  const { cartItem} = useContext(AuthContext);
+  const { cartItem, removeItem } = useContext(AuthContext);
   console.log("aaaa", cartItem)
   
   return (
@@ -41,6 +41,7 @@ const Favourite = ({ navigation }) => {
 
             {
               cartItem.map((item,index)=>(
+                console.log("itemid", item._id),
                 <View style={style.recommed_hotel} key={index}>
 
                 <View>
@@ -53,10 +54,10 @@ const Favourite = ({ navigation }) => {
                   <Text style={style.recommed_hotel_text}>{item.name}</Text>
                 </View>
     
-                <View>
+                {/* <View>
                   <Text>adsdd</Text>
                 </View>
-    
+     */}
                 <View style={style.recommed_hotel_border}></View>
                 <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
     
@@ -74,6 +75,13 @@ const Favourite = ({ navigation }) => {
                     <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
                     <Text>2 Beds</Text>
                   </View>
+                </View>
+                <View>
+                  <TouchableOpacity style={{flexDirection:'row', justifyContent:'center', alignItems:'center', marginTop: 5,}}
+                    onPress={()=>removeItem(item._id)}
+                  >
+                    <Text style={{fontSize: 15, color:'red'}}>Remove</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
               ))

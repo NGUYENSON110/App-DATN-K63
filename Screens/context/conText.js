@@ -30,8 +30,9 @@ export const AuthProvider = ({ children }) => {
       case DELETE_ADD_CART: {
         return {
           ...state,
-          cartItem: state.cartItem.filter(item => item.id !== action.payload)
+          cartItem: state.cartItem.filter(item => item._id !== action.payload)
         }
+        
       }
       default:
         return state
@@ -113,11 +114,12 @@ export const AuthProvider = ({ children }) => {
 
   const addToCart = (item) => {
     dispatch({ type: ADD_TO_CART, payload: item })
-    console.log("aaaa",item )
+    
   }
 
   const removeItem = (id) => {
     dispatch({ type: DELETE_ADD_CART, payload: id })
+    console.log("aaaa",id)
   }
 
   return (

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Image,
-    Dimensions,
-    TouchableOpacity,
-    ImageBackground,
-  } from 'react-native';
-  import { useNavigation } from '@react-navigation/native';
-  
-const Switch2 = ({  }) =>{   
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const Switch2 = ({ }) => {
   const navigation = useNavigation();
   const Data = [
     {
@@ -45,7 +45,7 @@ const Switch2 = ({  }) =>{
           name: "Lẩu Thái Sài Gòn",
           imageurl: "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1617091803/blog/le1xmyyshfhkwk81dnmw.webp",
         },
-        
+
       ]
     },
     {
@@ -110,7 +110,7 @@ const Switch2 = ({  }) =>{
         },
       ]
     }
-    ,{
+    , {
       name: "Chùa Trấn Quốc",
       imageurl: "https://i1-dulich.vnecdn.net/2022/05/11/chua-tran-quoc-2-4585-1652253984.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=kelCuiSiMeejHVljjN2WfA",
       description: "Đảo Hòn Tằm nằm cách thành phố Nha Trang 7 km, là một điểm du lịch Nha Trang, trải nghiệm nhất định bạn phải ghé qua khi tới với thành phố. Đảo Hòn Tằm đẹp mộng mơ với những hàng dừa chạy dọc trên bãi biển xanh ngát. ",
@@ -141,7 +141,7 @@ const Switch2 = ({  }) =>{
         },
       ]
     }
-    ,{
+    , {
       name: "Văn Miếu - Quốc Tử Giám",
       imageurl: "https://i1-dulich.vnecdn.net/2022/05/11/khue-van-cac-9424-1652253985.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=ZDjMle830cmKu8ElwkfAag",
       description: "Nha Trang không chỉ hấp dẫn với những bãi biển đẹp đến mê hồn người mà còn gây ấn tượng bởi những công trình kiến trúc độc đáo và đẹp mắt. Tháp bà Ponagar là một trong những quần thể kiến trúc văn hóa Chăm Pa lớn nhất ở miền Trung Việt Nam.",
@@ -174,44 +174,44 @@ const Switch2 = ({  }) =>{
     }
 
   ]
-    return (
-        <View>
-         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-         {Data.map((item, index) => (
-            // console.log(item),
+  return (
+    <View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {Data.map((item, index) => (
+          // console.log(item),
           <TouchableOpacity
             style={style.Touch}
             onPress={() => {
-              navigation.navigate('DetailsEx',{
+              navigation.navigate('DetailsEx', {
                 item
               });
             }}>
             <Image
-              source={{uri: item.imageurl}}
+              source={{ uri: item.imageurl }}
               style={style.TouchImage}
             />
           </TouchableOpacity>
         ))
 
         }
-                </ScrollView>
-        </View>
-    )
+      </ScrollView>
+    </View>
+  )
 
 }
 export default Switch2;
 
 const style = StyleSheet.create({
-    Touch: {
-        width: 120,
-        height: 150,
-        marginTop: 5,
-        marginLeft: 20,
-      },
+  Touch: {
+    width: 120,
+    height: 150,
+    marginTop: 5,
+    marginLeft: 20,
+  },
 
-      TouchImage: {
-        width: 120,
-        height: 150,
-        borderRadius: 10,
-      },
+  TouchImage: {
+    width: 120,
+    height: 150,
+    borderRadius: 10,
+  },
 })

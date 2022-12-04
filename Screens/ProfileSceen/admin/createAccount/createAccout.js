@@ -138,8 +138,7 @@ const LoginInput = () => {
             });
         if (username == "" || password == "" || email == "") {
             Alert.alert("Please enter username, password, !")
-        }
-
+        }           
     };
 
 
