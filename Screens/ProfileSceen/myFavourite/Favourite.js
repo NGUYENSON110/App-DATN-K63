@@ -72,8 +72,8 @@ const Favourite = ({ navigation }) => {
                   </View>
     
                   <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 20 }}>
-                    <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                    <Text>2 Beds</Text>
+                    <Icon name="child" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
+                    <Text>Free</Text>
                   </View>
                 </View>
                 <View>

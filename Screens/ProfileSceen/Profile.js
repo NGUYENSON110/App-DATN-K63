@@ -39,7 +39,7 @@ function Profile({ navigation }) {
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
 
             <View>
-              <Image source={require('../../Image/hanoi.jpg')} style={{ width: 150, height: 150, borderRadius: 75, }} />
+              <Image source={require('../../Image/imageavatar.png')} style={{ width: 150, height: 150, borderRadius: 75, }} />
             </View>
 
             <View style={{ marginTop: 20, }}>
