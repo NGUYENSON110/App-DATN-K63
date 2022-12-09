@@ -82,7 +82,9 @@ export const AuthProvider = ({ children }) => {
         console.log("resgister false: ", error)
       });
     if (username == '' || password == '' || email == '') {
-      Alert.alert('Please enter username and password and email')
+      Alert.alert('Please enter username and password and email');
+    } else {
+      Alert.alert('Sign Up Success');
     }
   }
 

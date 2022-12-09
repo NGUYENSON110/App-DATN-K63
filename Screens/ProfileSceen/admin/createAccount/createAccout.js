@@ -92,7 +92,7 @@ const LoginInput = () => {
     const [checkValidateUserName, setCheckValidateUserName] = useState(false)
     const [checkValidatepassWord, setCheckValidatepassWord] = useState(false)
     const [checkValidateemail, setCheckValidateEmail] = useState(false)
-
+    const navigation = useNavigation();
     //   const { register } = useContext(AuthContext);
 
     const handleCheckUserName = (text) => {
@@ -118,9 +118,9 @@ const LoginInput = () => {
     }
 
 
-    console.log('email', email)
-    console.log('username', userName)
-    console.log('password', password)
+    // console.log('email', email)
+    // console.log('username', userName)
+    // console.log('password', password)
 
 
     const fetchregister = (username, password, email, admin) => {
@@ -138,6 +138,8 @@ const LoginInput = () => {
             });
         if (username == "" || password == "" || email == "") {
             Alert.alert("Please enter username, password, !")
+        } else{
+            Alert.alert('Sign Up Success');
         }           
     };
 
@@ -221,7 +223,8 @@ const LoginInput = () => {
                             padding: 13,
                         }}
                         onPress={() => {
-                            fetchregister(userName, password, email, true)
+                            fetchregister(userName, password, email, true);
+                            navigation.navigate('admin');   
                         }}
                     >
                         <Text style={{ color: 'white' }}>Create Account</Text>

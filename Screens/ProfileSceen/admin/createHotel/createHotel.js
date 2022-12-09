@@ -90,15 +90,17 @@ const LoginInput = () => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [description, setDescription] = useState("");
-
+    const navigation = useNavigation();
 
 
     const createHotel = (name, imageurl, price, address, phone, description) => {
-        axios.post(`http://10.0.2.2:5000/v1/auth/register`, {
-            username,
-            password,
-            email,
-            admin,
+        axios.post(`http://10.0.2.2:5000/v1/hotel`, {
+            name,
+            imageurl,
+            price,
+            address,
+            phone,
+            description
         })
             .then(res => {
                 console.log("data", res.data)
@@ -106,8 +108,8 @@ const LoginInput = () => {
             .catch((error) => {
                 console.log("resgister false: ", error)
             });
-        if (username == "" || password == "" || email == "") {
-            Alert.alert("Please enter username, password, !")
+        if (name == "" || imageurl == "" || price == "" || address == ""  || phone == "" || description == "") {
+            Alert.alert("Please enter nameHotel, password, !")
         }
 
     };
@@ -116,21 +118,21 @@ const LoginInput = () => {
         title: 'Select Image',
         type: 'library',
         options: {
-          maxHeight: 200,
-          maxWidth: 200,
-          selectionLimit: 1,
-          mediaType: 'photo',
-          includeBase64: false,
-         
+            maxHeight: 200,
+            maxWidth: 200,
+            selectionLimit: 1,
+            mediaType: 'photo',
+            includeBase64: false,
         },
-      }
-
-    const uploadImage =  async() => {
-        const result = await launchImageLibrary(Options);
-        console.log('image:', result)
     }
 
+    const uploadImage = async () => {
+        const result = await launchImageLibrary(Options);
+        console.log('image:', result.assets)
+        setImageurl(result.assets[0].uri)
+    }
 
+    console.log("Image", imageurl)
 
 
     // const fetchregister = (username, password, email, admin) => {
@@ -157,19 +159,31 @@ const LoginInput = () => {
                 <TextInput
                     placeholder="name Hotel"
                     style={{ color: '#475569' }}
-                // value={userName}
-                // onChangeText={value => handleCheckUserName(value)}
+                    value={nameHotel}
+                    onChangeText={value => setNameHotel(value)}
                 />
                 <View style={styles.UserNameUnderlined}></View>
 
             </View>
 
             <View style={{ width: windowWidth - 60 }}>
-                <TouchableOpacity style={{ marginTop: 20, }}
-                    onPress={() => uploadImage()}
-                >
-                    <Text style={{ color: '#475569' }}> Upload Image</Text>
-                </TouchableOpacity>
+                {
+                     imageurl == "" ? <View>  
+                        <TouchableOpacity style={{ marginTop: 20, }}
+                        onPress={() => uploadImage()}
+                          >
+                        <Text style={{ color: '#475569' }}> Upload Image</Text>
+                    </TouchableOpacity>
+                    </View> 
+                    : 
+                    <View>
+                        <Image style={{ width: 50, height: 50, borderRadius: 10, marginTop: 10, }}
+                        source={{ uri: imageurl }}
+                    />
+                     </View>
+                }
+
+
 
                 <View style={styles.UserNameUnderlined}></View>
             </View>
@@ -178,8 +192,7 @@ const LoginInput = () => {
                 <TextInput
                     placeholder="price"
                     style={{ color: '#475569' }}
-                    keyboardType="email-address"
-                // onChangeText={value => setEmail(value)}
+                    onChangeText={value => setPrice(value)}
                 />
                 <View style={styles.UserNameUnderlined}></View>
             </View>
@@ -188,8 +201,7 @@ const LoginInput = () => {
                 <TextInput
                     placeholder="address"
                     style={{ color: '#475569' }}
-                    keyboardType="email-address"
-                // onChangeText={value => setEmail(value)}
+                    onChangeText={value => setAddress(value)}
                 />
                 <View style={styles.UserNameUnderlined}></View>
             </View>
@@ -198,8 +210,7 @@ const LoginInput = () => {
                 <TextInput
                     placeholder="phone"
                     style={{ color: '#475569' }}
-                    keyboardType="email-address"
-                // onChangeText={value => setEmail(value)}
+                    onChangeText={value => setPhone(value)}
                 />
                 <View style={styles.UserNameUnderlined}></View>
             </View>
@@ -217,7 +228,7 @@ const LoginInput = () => {
                     <TextInput
                         placeholder="description"
                         style={{ color: '#475569' }}
-                    // onChangeText={value => setPassword(value)}
+                        onChangeText={value => setDescription(value)}
                     />
 
                     {/* <TouchableOpacity
@@ -245,9 +256,18 @@ const LoginInput = () => {
                             justifyContent: 'center',
                             padding: 13,
                         }}
-                    // onPress={() => {
-                    //     fetchregister(, password, email, true)
-                    // }}
+                        onPress={() => {
+                            createHotel(
+                                nameHotel,
+                                imageurl,
+                                price,
+                                address,
+                                phone,
+                                description)
+                        navigation.navigate('admin');
+                        }
+                        
+                    }
                     >
                         <Text style={{ color: 'white' }}>Create Hotel</Text>
                     </TouchableOpacity>

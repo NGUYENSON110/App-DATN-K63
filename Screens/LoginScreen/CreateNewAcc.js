@@ -70,7 +70,7 @@ const LoginInput = () => {
   const [checkValidatepassWord, setCheckValidatepassWord] = useState(false)
   const [checkValidateemail, setCheckValidateEmail] = useState(false)
   const { register } = useContext(AuthContext);
-
+  const navigation = useNavigation();
 
 
   const handleCheckEmail = (text) => {
@@ -93,9 +93,9 @@ const LoginInput = () => {
       setCheckValidatepassWord(true)
     }
   }
-  console.log('email', email)
-  console.log('username', userName)
-  console.log('password', password)
+  // console.log('email', email)
+  // console.log('username', userName)
+  // console.log('password', password)
 
 
 
@@ -164,10 +164,10 @@ const LoginInput = () => {
               justifyContent: 'center',
               padding: 13,
             }}
-          onPress={() => {
-            register(userName,password,email)
-            
-          }}
+            onPress={() => {
+              register(userName, password, email)
+              navigation.navigate('Login');
+            }}
           >
             <Text style={{ color: 'white' }}>Create Account</Text>
           </TouchableOpacity>
