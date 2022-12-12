@@ -118,8 +118,8 @@ const LoginInput = () => {
     }
 
 
-    // console.log('email', email)
-    // console.log('username', userName)
+    console.log('email', email)
+    console.log('username', userName)
     // console.log('password', password)
 
 

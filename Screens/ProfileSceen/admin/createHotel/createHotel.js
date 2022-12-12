@@ -265,6 +265,7 @@ const LoginInput = () => {
                                 phone,
                                 description)
                         navigation.navigate('admin');
+                        n
                         }
                         
                     }
