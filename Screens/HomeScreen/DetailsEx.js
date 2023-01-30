@@ -69,9 +69,6 @@ const DetailsEx = ({ route, navigation }) => {
 
             <ScrollView horizontal style={style.ListFood} showsHorizontalScrollIndicator={false}>
               {item.food.map((item, index) => (
-
-
-
                 <View style={{flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                   <Image source={{ uri: item.imageurl }} style={{ width: 120, height: 120, borderRadius: 20, marginLeft: 5 }} />
                   <Text style={{marginTop: 5, fontSize: 15,width: 100,}}>{item.name}</Text>

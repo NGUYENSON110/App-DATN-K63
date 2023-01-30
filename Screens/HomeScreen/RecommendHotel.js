@@ -25,15 +25,15 @@ const RecommendHotel = ({ route, navigation }) => {
     const { RecommnedHotelApi } = route.params;
     const [numberLines, setNumberLines] = useState(2)
 
+  
+
     return (
         <SafeAreaView>
             <ScrollView>
                 <View>
                     {/* Back */}
 
-                    <View style={style.iconBack}
-
-                    >
+                    <View style={style.iconBack}>
                         <TouchableOpacity style={style.iconBack}
                             onPress={() => {
                                 navigation.navigate('Home')
@@ -181,7 +181,12 @@ const RecommendHotel = ({ route, navigation }) => {
 
 
                         <View style={{ backgroundColor: '#FFFFFF', width: 80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems: 'center' }}>
-                            <TouchableOpacity style={{ padding: 12, }}>
+                            <TouchableOpacity style={{ padding: 12, }}
+                                onPress = {() => {
+                                    console.log("aaaa")
+                                    // navigation.navigate('comment')
+                                }}
+                            >
                                 <Octicons name="comment" size={33} />
                             </TouchableOpacity>
                         </View>

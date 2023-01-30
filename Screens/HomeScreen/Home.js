@@ -119,7 +119,7 @@ const Home = ({ navigation }) => {
 
             <TextInput
               style={style.textInput}
-              placeholder="Seacrh hotel "
+              placeholder="Seacrh hotel"
             // onChangeText={(value) => {
             //   searchItem(value)
             // }}

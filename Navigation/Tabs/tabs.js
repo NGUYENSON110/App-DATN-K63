@@ -17,6 +17,8 @@ import admin from '../../Screens/ProfileSceen/admin/admin';
 import createAccout from '../../Screens/ProfileSceen/admin/createAccount/createAccout';
 import createAddress from '../../Screens/ProfileSceen/admin/createAddress/createAddress';
 import createHotel from '../../Screens/ProfileSceen/admin/createHotel/createHotel';
+import comment from '../../Screens/Commnet/comment';
+
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -37,6 +39,7 @@ const HomeStack = () => {
       <Stack.Screen name="createAccout" component={createAccout} />
       <Stack.Screen name="createAddress" component={createAddress} />
       <Stack.Screen name="createHotel" component={createHotel} />
+      <Stack.Screen name="comment" component={comment} />
     </Stack.Navigator>
   )
 }
