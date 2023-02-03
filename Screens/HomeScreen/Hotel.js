@@ -16,18 +16,25 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Octicons from "react-native-vector-icons/Octicons"
-import MaterialIcons from "react-native-vector-icons/MaterialIcons"
+import Octicons from "react-native-vector-icons/Octicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "./Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { AuthContext } from "../context/conText";
+
 
 
 const Hotel = ({ route, navigation }) => {
   const { hotelApi } = route.params;
-  const [numberLines, setNumberLines] = useState(2)
+ 
+  const [numberLines, setNumberLines] = useState(2);
   const { addToCart } = useContext(AuthContext);
+
+  
+
+
   // const favoriteHotel = async () => {
   //   try {
   //     const favorite = hotelApi;
@@ -39,7 +46,7 @@ const Hotel = ({ route, navigation }) => {
   //     Alert.alert("Error:", error)
   //   }
   // }
-  
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -208,14 +215,20 @@ const Hotel = ({ route, navigation }) => {
 
 
             <View style={{ backgroundColor: '#FFFFFF', width: 80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems: 'center' }}>
-              <TouchableOpacity style={{ padding: 12, }}>
+              <TouchableOpacity style={{ padding: 12, }}
+                onPress={() => {
+                  navigation.navigate("comment")
+                }}
+              >
                 <Octicons name="comment" size={33} />
               </TouchableOpacity>
             </View>
 
 
             <View>
-              <TouchableOpacity style={style.button_Book}>
+              <TouchableOpacity style={style.button_Book}
+
+              >
                 <Text style={{
                   fontSize: 24,
                   color: '#FFFFFF'
@@ -223,6 +236,8 @@ const Hotel = ({ route, navigation }) => {
                   BOOK NOW
                 </Text>
               </TouchableOpacity>
+
+            
             </View>
 
           </View>
