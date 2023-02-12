@@ -32,7 +32,7 @@ const Hotel = ({ route, navigation }) => {
   const [numberLines, setNumberLines] = useState(2);
   const { addToCart } = useContext(AuthContext);
 
-  
+    console.log("222222222", hotelApi)
 
 
   // const favoriteHotel = async () => {
@@ -217,7 +217,9 @@ const Hotel = ({ route, navigation }) => {
             <View style={{ backgroundColor: '#FFFFFF', width: 80, marginLeft: 25, marginTop: 10, borderRadius: 30, alignItems: 'center' }}>
               <TouchableOpacity style={{ padding: 12, }}
                 onPress={() => {
-                  navigation.navigate("comment")
+                  navigation.navigate("comment",{
+                    hotelApi
+                  })
                 }}
               >
                 <Octicons name="comment" size={33} />

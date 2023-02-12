@@ -14,7 +14,7 @@ import { AuthContext } from '../context/conText';
 function Profile({ navigation }) {
 
   const { logout, userInfo } = useContext(AuthContext);
-  // console.log("123", userInfo.user.email)
+  console.log("123", userInfo)
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>

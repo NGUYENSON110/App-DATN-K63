@@ -1,36 +1,50 @@
-import React, { useState } from 'react'
-import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect,useContext } from 'react'
+import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
+import { AuthContext } from '../context/conText';
 
 const comment = ({ navigation, route }) => {
+    const { userInfo } = useContext(AuthContext);
+    const { hotelApi } = route.params;
     const [comment, setComment] = useState('');
-   
-    console.log("commnet", comment);
-
-    const createCommnet = (comment,userId,hotelId,date) => {
-        axios.post(`http://10.0.2.2:5000/v1/comment`,{
-            comment, 
+    const [dataComment, setDateComment] = useState([]);
+    const abc = new Date();
+    console.log('comment',comment)
+    const createCommnet = (description, userId, hotelId, date) => {
+        axios.post(`http://10.0.2.2:5000/v1/comment`, {
+            description,
             userId,
             hotelId,
             date
         })
-        .then (res =>{
-            console.log(res.data);
-        })
-        .catch((error) =>{
-            console.log("comment false", error);
-        })
+            .then(res => {
+                console.log(res.data);
+                Alert.alert("Comment thành công!")
+            })
+            .catch((error) => {
+                console.log("comment false", error);
+            })
     }
+
+    useEffect(() => {
+        const fetchDataComment = async () => {
+            const result = await axios.get(`http://10.0.2.2:5000/v1/comment`);
+            setDateComment(result.data);
+
+        };
+        
+        fetchDataComment();
+    }, []);
     return (
         <SafeAreaView>
             <ScrollView>
                 <View>
 
                     <View style={style.iconBack}>
-                        <TouchableOpacity style={style.iconBack}
+                        <TouchableOpacity
                             onPress={() => {
                                 navigation.navigate('Home')
                             }}
@@ -39,7 +53,13 @@ const comment = ({ navigation, route }) => {
                             <Text> Back </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity style={style.btn_post}
+                            onPress={()=>{createCommnet(comment, userInfo.user._id,hotelApi._id, abc),
+                                navigation.navigate('Home')
+                            }
+                                   
+                        }
+                        >
                             <Text> Post</Text>
                         </TouchableOpacity>
                     </View>
@@ -48,32 +68,38 @@ const comment = ({ navigation, route }) => {
                     <View>
                         <TextInput
                             style={style.input}
-                            placeholder = "Để lại bình luận đánh giá nhé ! "
+                            placeholder="Để lại bình luận đánh giá nhé ! "
                             onChangeText={(value) => setComment(value)}
                         />
                     </View>
 
-                    <View style={style.banner}>
-                        <View style={style.container}>
 
-                            <View style={{ marginTop: 6, }}>
-                                <Image source={require('../../Image/avatar.png')} style={style.avatar} />
-                            </View>
+                    <View>
+                        {dataComment.map((item, index) => (
+                            <View style={style.banner}>
+                                <View style={style.container}>
 
-                            <View style={style.container_info}>
-                                <View>
-                                    <Text style={{}}>asdas</Text>
+                                    <View style={{ marginTop: 6, }}>
+                                        <Image source={require('../../Image/icondulich.jpg')} style={style.avatar} />
+                                    </View>
+
+                                    <View style={style.container_info}>
+                                        <View>
+                                            <Text style={{}}>{userInfo.user.username}</Text>
+                                        </View>
+                                        <View>
+                                            <Text style={{ fontSize: 13, }}>23/09</Text>
+                                        </View>
+                                    </View>
+
                                 </View>
-                                <View>
-                                    <Text style={{ fontSize: 13, }}>23/09</Text>
+                                <View style={{ marginLeft: 10, marginBottom: 10, }}>
+                                    <Text>{item.description}</Text>
                                 </View>
                             </View>
-
-                        </View>
-                        <View style={{ marginLeft: 10, marginBottom: 10, }}>
-                            <Text>adasdsadsadsad</Text>
-                        </View>
+                        ))}
                     </View>
+
 
 
                 </View>
@@ -90,13 +116,15 @@ const style = StyleSheet.create({
     iconBack: {
         flexDirection: "row",
         marginTop: 10,
+        justifyContent: 'space-between',
     },
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
         padding: 10,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FFFFFF",
+        borderRadius: 5,
     },
     banner: {
         backgroundColor: '#FFFFFF',
@@ -118,5 +146,10 @@ const style = StyleSheet.create({
         height: 35,
         width: 35,
         borderRadius: 15,
+    },
+    btn_post: {
+        marginTop: 17,
+        marginRight: 20,
+
     }
 })
