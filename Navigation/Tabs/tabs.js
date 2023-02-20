@@ -18,6 +18,8 @@ import createAccout from '../../Screens/ProfileSceen/admin/createAccount/createA
 import createAddress from '../../Screens/ProfileSceen/admin/createAddress/createAddress';
 import createHotel from '../../Screens/ProfileSceen/admin/createHotel/createHotel';
 import comment from '../../Screens/Commnet/comment';
+import booking from "../../Screens/Booking/Booking";
+import BookingHotel from "../../Screens/ProfileSceen/Booking/BookingHotel";
 
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -34,12 +36,14 @@ const HomeStack = () => {
       <Stack.Screen name="Hotel" component={Hotel} />
       <Stack.Screen name="RecommendHotel" component={RecommendHotel} />
       <Stack.Screen name="admin" component={admin} />
+      <Stack.Screen name="booking" component={booking} />
       {/* <Stack.Screen name="ScreachScreenDetails" component={ScreachScreenDetails} /> */}
       <Stack.Screen name="Favourite" component={Favourite} />
       <Stack.Screen name="createAccout" component={createAccout} />
       <Stack.Screen name="createAddress" component={createAddress} />
       <Stack.Screen name="createHotel" component={createHotel} />
       <Stack.Screen name="comment" component={comment} />
+      <Stack.Screen name="BookingHotel" component={BookingHotel} />
     </Stack.Navigator>
   )
 }

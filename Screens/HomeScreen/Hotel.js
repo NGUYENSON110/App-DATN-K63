@@ -229,7 +229,11 @@ const Hotel = ({ route, navigation }) => {
 
             <View>
               <TouchableOpacity style={style.button_Book}
-
+                  onPress={()=>{
+                    navigation.navigate('booking',{
+                      hotelApi
+                    })
+                  }}
               >
                 <Text style={{
                   fontSize: 24,

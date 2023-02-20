@@ -293,7 +293,7 @@ const Home = ({ navigation }) => {
 
           {/* Voucher */}
 
-          <View>
+          {/* <View>
             <View style={style.Experience}>
               <Text style={style.textExperience}> Voucher </Text>
             </View>
@@ -314,7 +314,7 @@ const Home = ({ navigation }) => {
                 ))}
               </ScrollView>
             </View>
-          </View>
+          </View> */}
 
 
 

@@ -117,8 +117,12 @@ function Profile({ navigation }) {
                     <Ionicons name="time-outline" size={25} />
                   </View>
 
-                  <View style={{ marginLeft: -100, }}>
-                    <Text style={{ fontSize: 15, fontWeight: '500' }}> Transaction </Text>
+                  <View style={{ marginLeft: -130, }}>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}>   <TouchableOpacity onPress={() => {
+                    navigation.navigate('BookingHotel')
+                  }}>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}> Booking</Text>
+                  </TouchableOpacity> </Text>
                   </View>
 
                   <View>
@@ -140,7 +144,7 @@ function Profile({ navigation }) {
                     <Ionicons name="pricetag-outline" size={25} />
                   </View>
 
-                  <View style={{ marginLeft: -100, }}>
+                  <View style={{ marginLeft: -110, }}>
                     <Text style={{ fontSize: 15, fontWeight: '500' }}> My Cupon </Text>
                   </View>
 

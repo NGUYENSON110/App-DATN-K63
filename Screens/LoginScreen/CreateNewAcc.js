@@ -66,10 +66,11 @@ const LoginInput = () => {
   const [userName, setuserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [checkValidateUserName, setCheckValidateUserName] = useState(false)
-  const [checkValidatepassWord, setCheckValidatepassWord] = useState(false)
-  const [checkValidateemail, setCheckValidateEmail] = useState(false)
-  const { register } = useContext(AuthContext);
+  const [checkValidateUserName, setCheckValidateUserName] = useState(false);
+  const [checkValidatepassWord, setCheckValidatepassWord] = useState(false);
+  const [checkValidateemail, setCheckValidateEmail] = useState(false);
+  const [phone,setPhone] =useState("");
+  const { register } =  useContext(AuthContext);
   const navigation = useNavigation();
 
 
@@ -112,10 +113,20 @@ const LoginInput = () => {
         <View style={styles.UserNameUnderlined}></View>
         {checkValidateUserName ? <Text style={styles.regexusername}>Account requires 6 letters and numbers</Text> : <Text style={styles.regexusername}></Text>}
       </View>
+      <View style={styles.UserNameUnderlined}></View>
+      <View style={{ width: windowWidth - 60 }}>
+        <TextInput
+          placeholder="Phone number"
+          style={{ color: '#475569' }}
+          keyboardType="email-address"
+          onChangeText={value => setPhone(value)}
+        />
+        <View style={styles.UserNameUnderlined}></View>
+      </View>
 
       <View style={{ width: windowWidth - 60 }}>
         <TextInput
-          placeholder="Email address or phone number"
+          placeholder="Email address "
           style={{ color: '#475569' }}
           keyboardType="email-address"
           onChangeText={value => setEmail(value)}
@@ -165,7 +176,7 @@ const LoginInput = () => {
               padding: 13,
             }}
             onPress={() => {
-              register(userName, password, email)
+              register(userName, password, phone,email)
               navigation.navigate('Login');
             }}
           >

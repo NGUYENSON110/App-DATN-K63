@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -12,7 +12,9 @@ const comment = ({ navigation, route }) => {
     const [comment, setComment] = useState('');
     const [dataComment, setDateComment] = useState([]);
     const abc = new Date();
-    console.log('comment',comment)
+
+
+
     const createCommnet = (description, userId, hotelId, date) => {
         axios.post(`http://10.0.2.2:5000/v1/comment`, {
             description,
@@ -35,9 +37,25 @@ const comment = ({ navigation, route }) => {
             setDateComment(result.data);
 
         };
-        
+
         fetchDataComment();
     }, []);
+
+
+    const deleteComment = async (id) => {
+        await axios.delete("http://10.0.2.2:5000/v1/comment/" + id)
+        .then((r) => {
+            Alert.alert('Xóa bình luận thành công!')
+            console.log("ress", r)
+        })
+        .catch((error)=>{
+            console.log("error",error)
+        })
+    };
+
+
+
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -54,11 +72,12 @@ const comment = ({ navigation, route }) => {
                         </TouchableOpacity>
 
                         <TouchableOpacity style={style.btn_post}
-                            onPress={()=>{createCommnet(comment, userInfo.user._id,hotelApi._id, abc),
-                                navigation.navigate('Home')
+                            onPress={() => {
+                                createCommnet(comment, userInfo.user._id, hotelApi._id, abc),
+                                    navigation.navigate('Home')
                             }
-                                   
-                        }
+
+                            }
                         >
                             <Text> Post</Text>
                         </TouchableOpacity>
@@ -88,9 +107,24 @@ const comment = ({ navigation, route }) => {
                                             <Text style={{}}>{userInfo.user.username}</Text>
                                         </View>
                                         <View>
-                                            <Text style={{ fontSize: 13, }}>23/09</Text>
+                                            <Text style={{ fontSize: 13, }}>15/2</Text>
                                         </View>
                                     </View>
+                                    {
+                                        userInfo.user.admin ? <View>
+                                            <TouchableOpacity style={{ marginLeft: 190, }}
+
+                                                onPress={() =>{
+                                                    deleteComment(item._id)
+                                                    navigation.navigate('Home')
+                                            
+                                                }}
+
+                                            >
+                                                <Text>Xóa</Text>
+                                            </TouchableOpacity>
+                                        </View> : <View></View>
+                                    }
 
                                 </View>
                                 <View style={{ marginLeft: 10, marginBottom: 10, }}>
@@ -99,8 +133,6 @@ const comment = ({ navigation, route }) => {
                             </View>
                         ))}
                     </View>
-
-
 
                 </View>
             </ScrollView>

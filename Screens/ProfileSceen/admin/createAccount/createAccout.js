@@ -88,6 +88,7 @@ const LoginInput = () => {
     // const [value, setValue] = useState(true)
     const [email, setEmail] = useState('');
     const [admin, setAdmin] = useState(false);
+    const [phone,setPhone] = useState("")
     // const admin = true;
     const [checkValidateUserName, setCheckValidateUserName] = useState(false)
     const [checkValidatepassWord, setCheckValidatepassWord] = useState(false)
@@ -123,11 +124,12 @@ const LoginInput = () => {
     // console.log('password', password)
 
 
-    const fetchregister = (username, password, email, admin) => {
+    const fetchregister = (username, password, email, phone,admin) => {
         axios.post(`http://10.0.2.2:5000/v1/auth/register`, {
             username,
             password,
             email,
+            phone,
             admin,
         })
             .then(res => {
@@ -160,6 +162,16 @@ const LoginInput = () => {
 
             <View style={{ width: windowWidth - 60 }}>
                 <TextInput
+                    placeholder="Phone"
+                    style={{ color: '#475569' }}
+                    keyboardType="email-address"
+                    onChangeText={value => setPhone(value)}
+                />
+                <View style={styles.UserNameUnderlined}></View>
+            </View>
+
+            <View style={{ width: windowWidth - 60 }}>
+                <TextInput
                     placeholder="Email"
                     style={{ color: '#475569' }}
                     keyboardType="email-address"
@@ -185,7 +197,7 @@ const LoginInput = () => {
                 <View
                     style={{
                         width: windowWidth - 60,
-                        marginTop: 10,
+                        
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -223,7 +235,7 @@ const LoginInput = () => {
                             padding: 13,
                         }}
                         onPress={() => {
-                            fetchregister(userName, password, email, true);
+                            fetchregister(userName, password, email, phone,true);
                             navigation.navigate('admin');   
                         }}
                     >

@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }) => {
 
     axios.post(`http://10.0.2.2:5000/v1/auth/login`, {
       username,
-      password
+      password,
+     
     })
       .then(res => {
         // console.log("data", res.data);
@@ -69,10 +70,11 @@ export const AuthProvider = ({ children }) => {
 
   }
 
-  const register = (username, password, email) => {
+  const register = (username, password, phone,email) => {
     axios.post(`http://10.0.2.2:5000/v1/auth/register`, {
       username,
       password,
+      phone,
       email
     })
       .then(res => {
