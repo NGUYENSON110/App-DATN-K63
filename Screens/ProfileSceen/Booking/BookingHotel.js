@@ -35,10 +35,21 @@ const BookingHotel = ({ navigation }) => {
         fetchDataBookingHotel();
     }, [])
 
+    console.log("databooking", hotel.phoneuserName)
 
+    // DELETE ROOM 
+    const deleteBooking = async (id) => {
+        await axios.delete(`http://10.0.2.2:5000/v1/booking/${id}`)
+        .then((r) => {
+            Alert.alert('Huỷ Thành Công!')
+            
+        })
+        .catch((error)=>{
+            console.log("error",error)
+        })
+    };
 
-
-
+   
     return (
         <SafeAreaView style={{
             marginTop: 20,
@@ -63,12 +74,13 @@ const BookingHotel = ({ navigation }) => {
                                             <Text style={style.recommed_hotel_text}>{item.hotelName}</Text>
                                             <Text style={style.recommed_hotel_text}>{item.price} $</Text>
                                             <Text style={style.recommed_hotel_text}>{item.phoneuserName}</Text>
+                                            <Text style={style.recommed_hotel_text}>Tổng số phòng đặt : {item.room}</Text>
                                         </View>
 
 
                                         <View>
-                                            <Text style={style.recommed_hotel_text}>Ngày đến :{item.time}</Text>
-                                            <Text style={style.recommed_hotel_text}>Ngày đi : {item.time}</Text>
+                                            <Text style={style.recommed_hotel_text}>Ngày đến :{item.timego}</Text>
+                                            <Text style={style.recommed_hotel_text}>Ngày đi : {item.timeover}</Text>
                                         </View>
 
                                         <View style={{ marginLeft: 10, }}>
@@ -78,6 +90,11 @@ const BookingHotel = ({ navigation }) => {
                                         <View style={{backgroundColor:'#ed4646', width: '25%', flexDirection:'row', justifyContent:'center', alignItems:'center', padding: 5, borderRadius: 5}}>
                                             <TouchableOpacity
                                                 style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}
+                                                onPress={()=>{
+                                                    deleteBooking(item._id)
+                                                    console.log('itemid', item._id)
+                                                    // navigation.navigate('Home')
+                                                }}
                                             >
                                                 <Text style={{color:'#FFFFFF'}}>Hủy Đặt </Text>
                                             </TouchableOpacity>

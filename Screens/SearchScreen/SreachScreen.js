@@ -41,10 +41,25 @@ const Sreach = ({ navigation }) => {
     fetchDataRecommnedHotel();
   }, [])
 
-  const sreachDatahotel =  (text) => {
+  const sreachDatahotelname =  (text) => {
     if (text) {
        const newData = dataRecommnedHotel.filter(item => {
         const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+        const itemDataAddress = item.address ? item.address.toUpperCase() : ''.toUpperCase();
+        return itemData.includes(text.toUpperCase()) || itemDataAddress.includes(text.toUpperCase());
+      })
+      setDataSreachnewItem(newData);
+      // console.log("newData:",dataSreachnewItem )
+    } else {
+      setDataSreachnewItem(dataRecommnedHotel)
+    }
+    // console.log("text", text)
+  }
+
+  const sreachDatahoteladdress =  (text) => {
+    if (text) {
+       const newData = dataRecommnedHotel.filter(item => {
+        const itemData = item.address ? item.address.toUpperCase() : ''.toUpperCase();
         return itemData.includes(text.toUpperCase());
       })
       setDataSreachnewItem(newData);
@@ -54,6 +69,22 @@ const Sreach = ({ navigation }) => {
     }
     // console.log("text", text)
   }
+
+  const sreachDatahotelprice =  (text) => {
+    if (text) {
+       const newData = dataRecommnedHotel.filter(item => {
+        const priceMatched = item.price == Number(text) ;
+          return priceMatched
+      })
+      setDataSreachnewItem(newData);
+      // console.log("newData:",dataSreachnewItem )
+    } else {
+      setDataSreachnewItem(dataRecommnedHotel)
+    }
+    // console.log("text", text)
+  }
+
+
 
 
 
@@ -82,7 +113,7 @@ const Sreach = ({ navigation }) => {
             <TextInput
               style={style.textInput}
               placeholder="Seacrh hotel "
-              onChangeText={(value) => sreachDatahotel(value)}
+              onChangeText={(value) => sreachDatahotelname(value)}
 
             />
             <AntDesign name="search1" size={16} style={style.iconSreach} />
@@ -92,10 +123,7 @@ const Sreach = ({ navigation }) => {
 
           <View>
 
-            <View style={{ marginTop: 10, marginLeft: 10, }}>
-              <Text style={{ fontSize: 15, fontWeight: '700', }}> Popular Hotels </Text>
-            </View>
-
+        
             <ScrollView>
               {
                 dataSreachnewItem.map((RecommnedHotelApi, index) => (
@@ -126,11 +154,10 @@ const Sreach = ({ navigation }) => {
                       <View style={{ flexDirection: 'row', }}>
 
                         <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
-                          <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
-                          <Text>{RecommnedHotelApi.bed}bed</Text>
+                          <Text>{RecommnedHotelApi.price}$</Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
+                        {/* <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
                           <Icon name="wifi" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
                           <Text>2 Beds</Text>
                         </View>
@@ -138,7 +165,7 @@ const Sreach = ({ navigation }) => {
                         <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
                           <Icon name="bed" size={21} style={{ marginRight: 5, color: '#4e93ff' }} />
                           <Text>2 Beds</Text>
-                        </View>
+                        </View> */}
                       </View>
                     </View>
                   </TouchableOpacity>

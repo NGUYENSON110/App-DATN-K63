@@ -41,6 +41,7 @@ const Home = ({ navigation }) => {
   const [dataHotel, setdataHotel] = useState([]);
   const [dataVoucher, setVoucher] = useState([]);
   const [dataRecommnedHotel, setReCommendHotel] = useState([]);
+  const [booking, setBooking] = useState([]);
   const { userInfo } = useContext(AuthContext);
 
 
@@ -87,6 +88,19 @@ const Home = ({ navigation }) => {
     };
     fetchDataRecommnedHotel();
   }, [])
+
+  // API BOOKING
+  useEffect(() => {
+    const fetchDataBooking = async () => {
+      const result = await axios.get(`http://10.0.2.2:5000/v1/booking`);
+      setBooking(result.data);
+      // console.log('RecommnedHotel : ', dataRecommnedHotel);
+    };
+    fetchDataBooking();
+  }, [])
+
+  console.log("booking", booking)
+
 
   return (
     <SafeAreaView style={style.backGround}>
@@ -154,9 +168,9 @@ const Home = ({ navigation }) => {
           {/*  Experience and Image*/}
 
           <View>
-            <View style={style.Experience}>
+            {/* <View style={style.Experience}>
               <Text style={style.textExperience}> Experience </Text>
-            </View>
+            </View> */}
 
             <View>
               {/* <Switch /> */}
@@ -208,6 +222,9 @@ const Home = ({ navigation }) => {
                           <View>
                             <Text style={style.HotelPrice}>
                               ${hotelApi.price}/Night
+                            </Text>
+                            <Text style={style.HotelRoom}>
+                                {hotelApi.room} Room
                             </Text>
                           </View>
 
@@ -468,7 +485,6 @@ const style = StyleSheet.create({
     margin: 10,
   },
   HotelPrice: {
-
     margin: 10,
     fontSize: 13,
     color: '#5c7dff',
@@ -509,5 +525,12 @@ const style = StyleSheet.create({
     height: 1,
     marginTop: 5,
     marginLeft: 15,
+  },
+  HotelRoom:{
+    fontSize: 12,
+    marginLeft: 6,
+    marginTop: -5,
+    padding: 5,
+    color: '#5c7dff'
   }
 });

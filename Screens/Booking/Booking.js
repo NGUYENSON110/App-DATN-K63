@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, Button, StyleSheet, Alert, TextInput } from 'react-native';
+import {  TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../context/conText';
 import axios from 'axios';
 
@@ -10,6 +10,8 @@ function Booking({ navigation, route }) {
     const [date, setDate] = useState(new Date());
     const [overDate, setoverDate] = useState(new Date());
     const [Booking, setBooking] = useState("");
+    const [currentDate, setcurrentDate] = useState(new Date());
+    const [room, setRoom] = useState("");
     const { hotelApi } = route.params;
     const { userInfo } = useContext(AuthContext);
     const hotelId = hotelApi._id;
@@ -17,7 +19,7 @@ function Booking({ navigation, route }) {
     const hotelName = hotelApi.name;
     const price = hotelApi.price;
 
-
+    console.log("room", room)
 
 
     const onChange = (event, selectedDate) => {
@@ -32,6 +34,9 @@ function Booking({ navigation, route }) {
             mode: currentMode,
             is24Hour: true,
         });
+        if (date < currentDate) {
+            Alert.alert("Xin vui long chon lai ngay gio")
+        }
     };
 
     const showDatepicker = () => {
@@ -64,14 +69,15 @@ function Booking({ navigation, route }) {
         showMode('time');
     };
 
-    const createBooking = (hotelId, phoneuserName, timego, timeover, hotelName, price) => {
-        axios.post(`http://10.0.2.2:5000/v1/booking`, {
+    const createBooking = async (hotelId, phoneuserName, timego, timeover, hotelName, price, room) => {
+        await axios.post(`http://10.0.2.2:5000/v1/booking`, {
             hotelId,
             phoneuserName,
             timego,
             timeover,
             hotelName,
-            price
+            price,
+            room
         })
             .then(res => {
                 console.log(res.data);
@@ -92,7 +98,7 @@ function Booking({ navigation, route }) {
         fetchDataBooking();
     }, []);
     return (
-        <View style={{ flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+        <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ marginTop: 40, width: '70%' }}>
                 <Button onPress={showDatepicker} title="Please , choose date " />
 
@@ -125,10 +131,19 @@ function Booking({ navigation, route }) {
                 <Text style={{ flexDirection: "row", justifyContent: 'center', textAlign: 'center', marginTop: 10, fontSize: 20, }}>Ngày đến :  {overDate.toLocaleString()}</Text>
             </View>
 
+            <View>
+                <TextInput style={style.input}
+                    placeholder="Tổng số phòng đặt"
+                    autoCapitalize="none"
+                    keyboardType="numeric"
+                    onChangeText={(value) => setRoom(value)}
+                />
+            </View>
+
             <View style={{ marginTop: 10, }}>
                 <Button style={style.btn_post}
                     onPress={() => {
-                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, price)
+                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, price, room)
                     }
                     }
                     title="BOOK"
@@ -144,5 +159,9 @@ function Booking({ navigation, route }) {
 export default Booking;
 
 const style = StyleSheet.create({
-
+    input: {
+        margin: 15,
+        height: 40,
+        color: 'black'
+    }
 })
