@@ -44,9 +44,10 @@ const Sreach = ({ navigation }) => {
   const sreachDatahotelname =  (text) => {
     if (text) {
        const newData = dataRecommnedHotel.filter(item => {
-        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-        const itemDataAddress = item.address ? item.address.toUpperCase() : ''.toUpperCase();
-        return itemData.includes(text.toUpperCase()) || itemDataAddress.includes(text.toUpperCase());
+        const itemData = item.name ? item.name.toUpperCase() : '';
+        const itemDataAddress = item.address ? item.address.toUpperCase() : '';
+        const itemDatePrice = item.price == text;
+        return itemData.includes(text.toUpperCase()) || itemDataAddress.includes(text.toUpperCase()) || itemDatePrice; 
       })
       setDataSreachnewItem(newData);
       // console.log("newData:",dataSreachnewItem )
@@ -56,36 +57,32 @@ const Sreach = ({ navigation }) => {
     // console.log("text", text)
   }
 
-  const sreachDatahoteladdress =  (text) => {
-    if (text) {
-       const newData = dataRecommnedHotel.filter(item => {
-        const itemData = item.address ? item.address.toUpperCase() : ''.toUpperCase();
-        return itemData.includes(text.toUpperCase());
-      })
-      setDataSreachnewItem(newData);
-      // console.log("newData:",dataSreachnewItem )
-    } else {
-      setDataSreachnewItem(dataRecommnedHotel)
-    }
-    // console.log("text", text)
-  }
+  // const sreachDatahoteladdress =  (text) => {
+  //   if (text) {
+  //      const newData = dataRecommnedHotel.filter(item => {
+  //       const itemData = item.address ? item.address.toUpperCase() : ''.toUpperCase();
+  //       return itemData.includes(text.toUpperCase());
+  //     })
+  //     setDataSreachnewItem(newData);
+  //     // console.log("newData:",dataSreachnewItem )
+  //   } else {
+  //     setDataSreachnewItem(dataRecommnedHotel)
+  //   }
+  //   // console.log("text", text)
+  // }
 
   const sreachDatahotelprice =  (text) => {
     if (text) {
        const newData = dataRecommnedHotel.filter(item => {
-        const priceMatched = item.price == Number(text) ;
-          return priceMatched
+          return item.price == text
       })
       setDataSreachnewItem(newData);
-      // console.log("newData:",dataSreachnewItem )
+     
     } else {
       setDataSreachnewItem(dataRecommnedHotel)
     }
-    // console.log("text", text)
+   
   }
-
-
-
 
 
   return (
