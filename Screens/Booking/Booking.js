@@ -90,10 +90,11 @@ function Booking({ navigation, route }) {
             })
             .catch((error) => {
                 console.log("comment false", error);
-
+                
             })
-
-
+        if(room == ''){
+            Alert.alert("Xin chọn lại phòng")
+        }
     }
 
     useEffect(() => {
@@ -174,7 +175,7 @@ function Booking({ navigation, route }) {
                 />
             </View>
 
-            <View style={{ marginBottom: 15, width: '70%', flexDirection: 'row', marginLeft: -55 }}>
+            <View style={{ marginBottom: 15, width: '70%', flexDirection: 'row', marginLeft: -10 }}>
                 <Text style={{ flexDirection: "row", justifyContent: 'center', textAlign: 'center', marginTop: 10, fontSize: 20, }}>Tổng giá tiền :  {newPrice == "" ? hotelApi.price : newPrice }</Text>
 
 
@@ -189,7 +190,7 @@ function Booking({ navigation, route }) {
                 >
                     <Text style={{ padding: 5, color: '#FFFFFF' }}>Mã giảm giá</Text>
                 </TouchableOpacity>
-
+{/* 
                 <TouchableOpacity
                     style={{ backgroundColor: '#ed4646', borderRadius: 5, marginLeft: 20, flexDirection: 'row', alignItems: 'center', marginTop: 10, }}
                     onPress={() => {
@@ -198,7 +199,7 @@ function Booking({ navigation, route }) {
                     }}
                 >
                     <Text style={{ padding: 5, color: '#FFFFFF' }}>Áp dụng</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
 
             </View>
@@ -208,7 +209,7 @@ function Booking({ navigation, route }) {
             <View style={{ marginTop: 10, }}>
                 <Button style={style.btn_post}
                     onPress={() => {
-                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, price, room, mdh)
+                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, newPrice, room, mdh)
                     }
                     }
                     title="BOOK"

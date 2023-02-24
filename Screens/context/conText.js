@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
         // console.log("email", res.data.user.email)
       })
       .catch((error) => {
+        Alert.alert("Sai tài khoản và mật khẩu")
         console.log("login false: ", error)
       })
 

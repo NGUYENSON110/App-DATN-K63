@@ -10,6 +10,7 @@ import {
     Dimensions,
     TouchableOpacity,
     ImageBackground,
+    Alert 
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
@@ -40,9 +41,9 @@ const BookingHotel = ({ navigation }) => {
     // DELETE ROOM 
     const deleteBooking = async (id) => {
         await axios.delete(`http://10.0.2.2:5000/v1/booking/${id}`)
-        .then((r) => {
+        .then(() => {
             Alert.alert('Huỷ Thành Công!')
-            
+                
         })
         .catch((error)=>{
             console.log("error",error)
@@ -94,7 +95,7 @@ const BookingHotel = ({ navigation }) => {
                                                 onPress={()=>{
                                                     deleteBooking(item._id)
                                                     console.log('itemid', item._id)
-                                                    // navigation.navigate('Home')
+                                                    navigation.navigate('Home')
                                                 }}
                                             >
                                                 <Text style={{color:'#FFFFFF'}}>Hủy Đặt </Text>

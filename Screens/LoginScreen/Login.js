@@ -136,13 +136,13 @@ const LoginInput = () => {
           />
 
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               navigation.navigate('ForgotPassword');
             }}>
             <Text style={{ fontSize: 15 }}>Forgot?</Text>
 
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <View style={styles.UserNameUnderlined}></View>

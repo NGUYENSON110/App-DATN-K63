@@ -149,7 +149,7 @@ const Sreach = ({ navigation }) => {
                       <View style={{ flexDirection: 'row', }}>
 
                         <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
-                          <Text>{RecommnedHotelApi.price}$</Text>
+                          <Text>Giá phòng :{RecommnedHotelApi.price}$</Text>
                         </View>
 
                         {/* <View style={{ flexDirection: 'row', marginLeft: 25, marginTop: 10, }}>
