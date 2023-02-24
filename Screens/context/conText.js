@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../api/config';
-import { ADD_TO_CART, DELETE_ADD_CART } from "./types"
+import { ADD_TO_CART, DELETE_ADD_CART, ADD_VOUCHER } from "./types"
 
 
 export const AuthContext = createContext();
@@ -24,6 +24,12 @@ export const AuthProvider = ({ children }) => {
         return {
           ...state,
           cartItem: [...state.cartItem, action.payload]
+        }
+      }
+
+      case ADD_VOUCHER:{
+        return{
+          cartItem: [state.cartItem, action.payload]
         }
       }
 
@@ -123,11 +129,14 @@ export const AuthProvider = ({ children }) => {
 
   const removeItem = (id) => {
     dispatch({ type: DELETE_ADD_CART, payload: id })
-    console.log("aaaa",id)
+    
+  }
+  const addVoucher = (item) =>{
+    dispatch({type: ADD_VOUCHER , payload:item})
   }
 
   return (
-    <AuthContext.Provider value={{ login, register, logout, isLoading, userToken, userInfo, addToCart, removeItem, cartItem: state.cartItem }}>
+    <AuthContext.Provider value={{ login, register, logout, isLoading, userToken, userInfo, addToCart, removeItem, addVoucher, cartItem: state.cartItem }}>
       {children}
     </AuthContext.Provider>
   )

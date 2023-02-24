@@ -72,9 +72,10 @@ const BookingHotel = ({ navigation }) => {
 
                                         <View>
                                             <Text style={style.recommed_hotel_text}>{item.hotelName}</Text>
-                                            <Text style={style.recommed_hotel_text}>{item.price} $</Text>
-                                            <Text style={style.recommed_hotel_text}>{item.phoneuserName}</Text>
+                                            <Text style={style.recommed_hotel_text}>Tổng giá : {item.price} $</Text>
+                                            <Text style={style.recommed_hotel_text}>Số điện thoại : {item.phoneuserName}</Text>
                                             <Text style={style.recommed_hotel_text}>Tổng số phòng đặt : {item.room}</Text>
+                                            <Text style={style.recommed_hotel_text}>Mã đặt phòng : {item.mdh}</Text>
                                         </View>
 
 

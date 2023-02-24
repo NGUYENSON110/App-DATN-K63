@@ -34,7 +34,6 @@ const Sreach = ({ navigation }) => {
     const fetchDataRecommnedHotel = async () => {
       const result = await axios.get(`http://10.0.2.2:5000/v1/recommendHotel`);
       setReCommendHotel(result.data);
-      // console.log('RecommnedHotel : ', dataRecommnedHotel);
        setDataSreachnewItem(dataRecommnedHotel)
       console.log("aaaa", dataSreachnewItem)
     };
@@ -50,11 +49,10 @@ const Sreach = ({ navigation }) => {
         return itemData.includes(text.toUpperCase()) || itemDataAddress.includes(text.toUpperCase()) || itemDatePrice; 
       })
       setDataSreachnewItem(newData);
-      // console.log("newData:",dataSreachnewItem )
     } else {
       setDataSreachnewItem(dataRecommnedHotel)
     }
-    // console.log("text", text)
+   
   }
 
   // const sreachDatahoteladdress =  (text) => {

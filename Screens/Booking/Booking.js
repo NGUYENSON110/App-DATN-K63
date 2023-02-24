@@ -1,32 +1,36 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import { View, Text, Button, StyleSheet, Alert, TextInput } from 'react-native';
-import {  TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, Button, StyleSheet, Alert, TextInput, TouchableOpacity } from 'react-native';
 import { AuthContext } from '../context/conText';
 import axios from 'axios';
+import EventBus from 'react-native-event-bus';
+import { connect } from 'react-redux';
 
+
+
+let listenerVoucher = null;
 function Booking({ navigation, route }) {
     const [date, setDate] = useState(new Date());
     const [overDate, setoverDate] = useState(new Date());
     const [Booking, setBooking] = useState("");
     const [currentDate, setcurrentDate] = useState(new Date());
     const [room, setRoom] = useState("");
+    const [newPrice , setnewPrice] =useState("");
     const { hotelApi } = route.params;
-    const { userInfo } = useContext(AuthContext);
+    const { userInfo, cartItem } = useContext(AuthContext);
     const hotelId = hotelApi._id;
     const phoneUser = userInfo.user.phone;
     const hotelName = hotelApi.name;
     const price = hotelApi.price;
-
-    console.log("room", room)
-
-
+    var mdh = Math.round(Math.random() * 99) + 1;
+    
+   
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
         setDate(currentDate);
     };
-
+   
     const showMode = (currentMode) => {
         DateTimePickerAndroid.open({
             value: date,
@@ -69,7 +73,7 @@ function Booking({ navigation, route }) {
         showMode('time');
     };
 
-    const createBooking = async (hotelId, phoneuserName, timego, timeover, hotelName, price, room) => {
+    const createBooking = async (hotelId, phoneuserName, timego, timeover, hotelName, price, room, mdh) => {
         await axios.post(`http://10.0.2.2:5000/v1/booking`, {
             hotelId,
             phoneuserName,
@@ -77,7 +81,8 @@ function Booking({ navigation, route }) {
             timeover,
             hotelName,
             price,
-            room
+            room,
+            mdh
         })
             .then(res => {
                 console.log(res.data);
@@ -85,7 +90,10 @@ function Booking({ navigation, route }) {
             })
             .catch((error) => {
                 console.log("comment false", error);
+
             })
+
+
     }
 
     useEffect(() => {
@@ -97,6 +105,32 @@ function Booking({ navigation, route }) {
 
         fetchDataBooking();
     }, []);
+
+    
+
+    useEffect(() => {
+        const fetchDataBooking = async () => {
+            const result = await axios.get(`http://10.0.2.2:5000/v1/comment`);
+            setBooking(result.data);
+
+        };
+
+        fetchDataBooking();
+    }, []);
+
+    useEffect(()=>{
+        console.log(" EventBus.getInstance().addListener")
+        EventBus.getInstance().addListener("voucher", listenerVoucher = data => {
+          var newPrice = hotelApi.price - data
+          setnewPrice(newPrice);
+        })
+        return()=>{
+            console.log(" EventBus.getInstance().removeListener")
+            EventBus.getInstance().removeListener(listenerVoucher);
+        }
+    },[])
+   
+
     return (
         <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ marginTop: 40, width: '70%' }}>
@@ -140,10 +174,41 @@ function Booking({ navigation, route }) {
                 />
             </View>
 
+            <View style={{ marginBottom: 15, width: '70%', flexDirection: 'row', marginLeft: -55 }}>
+                <Text style={{ flexDirection: "row", justifyContent: 'center', textAlign: 'center', marginTop: 10, fontSize: 20, }}>Tổng giá tiền :  {newPrice == "" ? hotelApi.price : newPrice }</Text>
+
+
+                <TouchableOpacity
+                    style={{ backgroundColor: '#ed4646', borderRadius: 5, marginLeft: 20, flexDirection: 'row', alignItems: 'center', marginTop: 10, }}
+                    onPress={() => {
+                        navigation.navigate('voucher',{
+                            hotelApi
+                        })
+                        console.log("aaaa")
+                    }}
+                >
+                    <Text style={{ padding: 5, color: '#FFFFFF' }}>Mã giảm giá</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{ backgroundColor: '#ed4646', borderRadius: 5, marginLeft: 20, flexDirection: 'row', alignItems: 'center', marginTop: 10, }}
+                    onPress={() => {
+                        
+                        
+                    }}
+                >
+                    <Text style={{ padding: 5, color: '#FFFFFF' }}>Áp dụng</Text>
+                </TouchableOpacity>
+
+
+            </View>
+
+
+
             <View style={{ marginTop: 10, }}>
                 <Button style={style.btn_post}
                     onPress={() => {
-                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, price, room)
+                        createBooking(hotelId, phoneUser, date.toLocaleString(), overDate.toLocaleDateString(), hotelName, price, room, mdh)
                     }
                     }
                     title="BOOK"

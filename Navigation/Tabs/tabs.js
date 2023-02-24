@@ -20,6 +20,7 @@ import createHotel from '../../Screens/ProfileSceen/admin/createHotel/createHote
 import comment from '../../Screens/Commnet/comment';
 import booking from "../../Screens/Booking/Booking";
 import BookingHotel from "../../Screens/ProfileSceen/Booking/BookingHotel";
+import voucher from "../../Screens/voucher/voucher"
 
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -44,6 +45,7 @@ const HomeStack = () => {
       <Stack.Screen name="createHotel" component={createHotel} />
       <Stack.Screen name="comment" component={comment} />
       <Stack.Screen name="BookingHotel" component={BookingHotel} />
+      <Stack.Screen name="voucher" component={voucher} />
     </Stack.Navigator>
   )
 }
